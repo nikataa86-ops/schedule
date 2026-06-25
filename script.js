@@ -1,62 +1,58 @@
-const today = new Date().getDate();
-const calendar = document.querySelector(".calendar");
-const planBox = document.getElementById("planBox");
+let currentMonth = new Date().getMonth();
+const monthTitle = document.getElementById("monthTitle");
 
-calendar.innerHTML = "";
+function renderCalendar() {
+  const calendar = document.querySelector(".calendar");
+  calendar.innerHTML = "";
 
-const colors = {
-  1: "#ff4d6d",
-  2: "#a855f7",
-  3: "#22c55e",
-  4: "#38bdf8",
-  5: "#facc15",
+  const year = new Date().getFullYear();
+  const daysInMonth = new Date(year, currentMonth + 1, 0).getDate();
+
+  monthTitle.textContent = `${currentMonth + 1}月`;
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    const day = document.createElement("div");
+    day.className = "day";
+
+    const num = document.createElement("div");
+    num.textContent = i;
+
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    day.appendChild(num);
+    day.appendChild(dot);
+
+    const saved = localStorage.getItem(`plan-${currentMonth}-${i}`);
+    if (saved) {
+      const memo = document.createElement("div");
+      memo.style.fontSize = "10px";
+      memo.textContent = saved;
+      day.appendChild(memo);
+    }
+
+    day.addEventListener("click", () => {
+      const text = prompt(`${i}日の予定`);
+      if (text) {
+        localStorage.setItem(`plan-${currentMonth}-${i}`, text);
+        renderCalendar();
+      }
+    });
+
+    calendar.appendChild(day);
+  }
+}
+
+document.getElementById("prev").onclick = () => {
+  currentMonth--;
+  if (currentMonth < 0) currentMonth = 11;
+  renderCalendar();
 };
 
-for (let i = 1; i <= 31; i++) {
-  const day = document.createElement("div");
-  day.className = "day";
+document.getElementById("next").onclick = () => {
+  currentMonth++;
+  if (currentMonth > 11) currentMonth = 0;
+  renderCalendar();
+};
 
-  const num = document.createElement("div");
-  num.textContent = i;
-
-  const dot = document.createElement("div");
-  dot.className = "dot";
-
-  const colorIndex = (i % 5) + 1;
-  dot.style.background = colors[colorIndex];
-
-  day.appendChild(num);
-  day.appendChild(dot);
-
-  // ⭐保存データを表示（ここがポイント）
-  const saved = localStorage.getItem(`plan-${i}`);
-  if (saved) {
-    const memo = document.createElement("div");
-    memo.style.fontSize = "10px";
-    memo.style.marginTop = "4px";
-    memo.textContent = saved;
-    day.appendChild(memo);
-  }
-
-  // ⭐クリックで予定入力＆保存
-  day.addEventListener("click", () => {
-    const text = prompt(`${i}日の予定を入力してね`);
-
-    if (text) {
-      localStorage.setItem(`plan-${i}`, text);
-
-      planBox.innerHTML = `${i}日：${text}`;
-
-      // 画面更新
-      location.reload();
-    }
-  });
-
-  // 今日ハイライト
-  if (i === today) {
-    day.style.background = "rgba(0, 255, 200, 0.3)";
-    day.style.boxShadow = "0 0 12px rgba(0,255,200,0.7)";
-  }
-
-  calendar.appendChild(day);
-}
+renderCalendar();
