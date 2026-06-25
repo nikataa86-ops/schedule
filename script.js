@@ -1,8 +1,20 @@
-const today = new Date().getDate();
 const calendar = document.querySelector(".calendar");
+const monthTitle = document.getElementById("monthTitle");
 
 let currentMonth = new Date().getMonth();
-const monthTitle = document.getElementById("monthTitle");
+const today = new Date().getDate();
+
+const members = {
+  ALL: "#cbd5e1",
+  SHORI: "#fda4af",
+  FUMA: "#c4b5fd",
+  SO: "#86efac",
+  TAKUTO: "#93c5fd",
+  YOSHITAKA: "#fde68a",
+  MASAKI: "#f9a8d4",
+  SHUTO: "#fdba74",
+  TAIKI: "#a5b4fc"
+};
 
 function renderCalendar() {
   calendar.innerHTML = "";
@@ -18,49 +30,44 @@ function renderCalendar() {
 
     const num = document.createElement("div");
     num.textContent = i;
-
     day.appendChild(num);
 
-    // ⭐予定取得
     const saved = localStorage.getItem(`plan-${currentMonth}-${i}`);
 
-    // ⭐予定がある日だけメンカラドット表示
     if (saved) {
+      const data = JSON.parse(saved);
+
       const dot = document.createElement("div");
       dot.className = "dot";
 
-      const colors = {
-        1: "#ff4d6d",
-        2: "#a855f7",
-        3: "#22c55e",
-        4: "#38bdf8",
-        5: "#facc15",
-      };
+      dot.style.background = members[data.member] || members.ALL;
 
-      const colorIndex = (i % 5) + 1;
-      dot.style.background = colors[colorIndex];
-
-      day.appendChild(dot);
-
-      // 予定も表示
       const memo = document.createElement("div");
       memo.style.fontSize = "10px";
       memo.style.marginTop = "4px";
-      memo.textContent = saved;
+      memo.textContent = `${data.member}: ${data.text}`;
+
+      day.appendChild(dot);
       day.appendChild(memo);
     }
 
-    // ⭐クリックで予定入力
     day.addEventListener("click", () => {
-      const text = prompt(`${i}日の予定を入力してね`);
+      const member = prompt("メンバー入力（ALL / SHORI / FUMA / SO / TAKUTO / YOSHITAKA / MASAKI / SHUTO / TAIKI）");
+      if (!member) return;
 
-      if (text) {
-        localStorage.setItem(`plan-${currentMonth}-${i}`, text);
-        renderCalendar();
-      }
+      const text = prompt(`${i}日の予定`);
+      if (!text) return;
+
+      const data = {
+        member: member,
+        text: text
+      };
+
+      localStorage.setItem(`plan-${currentMonth}-${i}`, JSON.stringify(data));
+
+      renderCalendar();
     });
 
-    // ⭐今日ハイライト
     if (
       currentMonth === new Date().getMonth() &&
       i === today
@@ -73,7 +80,6 @@ function renderCalendar() {
   }
 }
 
-// ← →
 document.getElementById("prev").onclick = () => {
   currentMonth--;
   if (currentMonth < 0) currentMonth = 11;
