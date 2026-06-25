@@ -49,4 +49,17 @@ body{
   margin-top:6px;
   background: transparent; /* ←これ重要 */
 }
+.month-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 15px;
+  color:white;
+  font-weight:bold;
+}
+.month-bar button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:20px;
 }
