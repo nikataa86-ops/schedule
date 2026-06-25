@@ -1,9 +1,9 @@
 const today = new Date().getDate();
 const calendar = document.querySelector(".calendar");
+const planBox = document.getElementById("planBox");
 
 calendar.innerHTML = "";
 
-// ここがメンカラ設定（あとで好きに変えられる）
 const colors = {
   1: "#ff4d6d",
   2: "#a855f7",
@@ -22,14 +22,17 @@ for (let i = 1; i <= 31; i++) {
   const dot = document.createElement("div");
   dot.className = "dot";
 
-  // 日付ごとに色変える
   const colorIndex = (i % 5) + 1;
   dot.style.background = colors[colorIndex];
 
   day.appendChild(num);
   day.appendChild(dot);
 
-  // 今日ハイライト
+  // ⭐クリックイベントはここ！！
+  day.addEventListener("click", () => {
+    planBox.innerHTML = `${i}日の予定はまだないよ`;
+  });
+
   if (i === today) {
     day.style.background = "rgba(0, 255, 200, 0.3)";
     day.style.boxShadow = "0 0 12px rgba(0,255,200,0.7)";
