@@ -5,15 +5,15 @@ let currentMonth = new Date().getMonth();
 const today = new Date().getDate();
 
 const members = {
-  ALL: "#cbd5e1",       // パステルグレー
-  SHORI: "#fda4af",     // パステル赤（ピンク寄り）
-  FUMA: "#c4b5fd",      // パステル紫
-  SO: "#86efac",        // パステル緑
-  TAKUTO: "#93c5fd",    // パステル水色
-  YOSHITAKA: "#a3e635", // パステル黄緑
-  MASAKI: "#f9a8d4",    // パステルピンク
-  SHUTO: "#fde047",     // パステル黄色
-  TAIKI: "#e5e7eb"      // パステル白（薄いグレー寄り）
+  ALL: "#cbd5e1",
+  SHORI: "#fda4af",
+  FUMA: "#c4b5fd",
+  SO: "#86efac",
+  TAKUTO: "#93c5fd",
+  YOSHITAKA: "#a3e635",
+  MASAKI: "#f9a8d4",
+  SHUTO: "#fde047",
+  TAIKI: "#e5e7eb"
 };
 
 function renderCalendar() {
@@ -39,7 +39,6 @@ function renderCalendar() {
 
       const dot = document.createElement("div");
       dot.className = "dot";
-
       dot.style.background = members[data.member] || members.ALL;
 
       const memo = document.createElement("div");
