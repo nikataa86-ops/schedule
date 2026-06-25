@@ -5,15 +5,15 @@ let currentMonth = new Date().getMonth();
 const today = new Date().getDate();
 
 const members = {
-  ALL: "#cbd5e1",
-  SHORI: "#fda4af",
-  FUMA: "#c4b5fd",
-  SO: "#86efac",
-  TAKUTO: "#93c5fd",
-  YOSHITAKA: "#fde68a",
-  MASAKI: "#f9a8d4",
-  SHUTO: "#fdba74",
-  TAIKI: "#a5b4fc"
+  ALL: "#cbd5e1",       // パステルグレー
+  SHORI: "#fda4af",     // パステル赤（ピンク寄り）
+  FUMA: "#c4b5fd",      // パステル紫
+  SO: "#86efac",        // パステル緑
+  TAKUTO: "#93c5fd",    // パステル水色
+  YOSHITAKA: "#a3e635", // パステル黄緑
+  MASAKI: "#f9a8d4",    // パステルピンク
+  SHUTO: "#fde047",     // パステル黄色
+  TAIKI: "#e5e7eb"      // パステル白（薄いグレー寄り）
 };
 
 function renderCalendar() {
