@@ -28,14 +28,31 @@ for (let i = 1; i <= 31; i++) {
   day.appendChild(num);
   day.appendChild(dot);
 
-  // ★クリック（ここが重要）
+  // ⭐保存データを表示（ここがポイント）
+  const saved = localStorage.getItem(`plan-${i}`);
+  if (saved) {
+    const memo = document.createElement("div");
+    memo.style.fontSize = "10px";
+    memo.style.marginTop = "4px";
+    memo.textContent = saved;
+    day.appendChild(memo);
+  }
+
+  // ⭐クリックで予定入力＆保存
   day.addEventListener("click", () => {
     const text = prompt(`${i}日の予定を入力してね`);
+
     if (text) {
+      localStorage.setItem(`plan-${i}`, text);
+
       planBox.innerHTML = `${i}日：${text}`;
+
+      // 画面更新
+      location.reload();
     }
   });
 
+  // 今日ハイライト
   if (i === today) {
     day.style.background = "rgba(0, 255, 200, 0.3)";
     day.style.boxShadow = "0 0 12px rgba(0,255,200,0.7)";
