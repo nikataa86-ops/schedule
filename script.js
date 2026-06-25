@@ -1,94 +1,224 @@
-const calendar = document.querySelector(".calendar");
+const calendar = document.getElementById("calendar");
 const monthTitle = document.getElementById("monthTitle");
-
-let currentMonth = new Date().getMonth();
-const today = new Date().getDate();
+const planList = document.getElementById("planList");
 
 const members = {
-  ALL: "#cbd5e1",
-  SHORI: "#fda4af",
-  FUMA: "#c4b5fd",
-  SO: "#86efac",
-  TAKUTO: "#93c5fd",
-  YOSHITAKA: "#a3e635",
-  MASAKI: "#f9a8d4",
-  SHUTO: "#fde047",
-  TAIKI: "#e5e7eb"
+  ALL: { color: "#cbd5e1" },
+  SHORI: { color: "#fda4af" },
+  FUMA: { color: "#c4b5fd" },
+  SO: { color: "#86efac" },
+  TAKUTO: { color: "#93c5fd" },
+  YOSHITAKA: { color: "#bef264" },
+  MASAKI: { color: "#f9a8d4" },
+  SHUTO: { color: "#fde68a" },
+  TAIKI: { color: "#f3f4f6" }
 };
 
-function renderCalendar() {
-  calendar.innerHTML = "";
+let current = new Date();
+let filter = "ALL";
 
-  const year = new Date().getFullYear();
-  const daysInMonth = new Date(year, currentMonth + 1, 0).getDate();
-
-  monthTitle.textContent = `${currentMonth + 1}月`;
-
-  for (let i = 1; i <= daysInMonth; i++) {
-    const day = document.createElement("div");
-    day.className = "day";
-
-    const num = document.createElement("div");
-    num.textContent = i;
-    day.appendChild(num);
-
-    const saved = localStorage.getItem(`plan-${currentMonth}-${i}`);
-
-    if (saved) {
-      const data = JSON.parse(saved);
-
-      const dot = document.createElement("div");
-      dot.className = "dot";
-      dot.style.background = members[data.member] || members.ALL;
-
-      const memo = document.createElement("div");
-      memo.style.fontSize = "10px";
-      memo.style.marginTop = "4px";
-      memo.textContent = `${data.member}: ${data.text}`;
-
-      day.appendChild(dot);
-      day.appendChild(memo);
-    }
-
-    day.addEventListener("click", () => {
-      const member = prompt("メンバー入力（ALL / SHORI / FUMA / SO / TAKUTO / YOSHITAKA / MASAKI / SHUTO / TAIKI）");
-      if (!member) return;
-
-      const text = prompt(`${i}日の予定`);
-      if (!text) return;
-
-      const data = {
-        member: member,
-        text: text
-      };
-
-      localStorage.setItem(`plan-${currentMonth}-${i}`, JSON.stringify(data));
-
-      renderCalendar();
-    });
-
-    if (
-      currentMonth === new Date().getMonth() &&
-      i === today
-    ) {
-      day.style.background = "rgba(0, 255, 200, 0.3)";
-      day.style.boxShadow = "0 0 12px rgba(0,255,200,0.7)";
-    }
-
-    calendar.appendChild(day);
-  }
+function key(date){
+  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 }
 
-document.getElementById("prev").onclick = () => {
-  currentMonth--;
-  if (currentMonth < 0) currentMonth = 11;
-  renderCalendar();
-};
+function loadPlans(){
+  return JSON.parse(localStorage.getItem("plans") || "{}");
+}
 
-document.getElementById("next").onclick = () => {
-  currentMonth++;
-  if (currentMonth > 11) currentMonth = 0;
-  renderCalendar();
-};
+function savePlans(data){
+  localStorage.setItem("plans", JSON.stringify(data));
+}
 
+function renderCalendar(){
+
+  calendar.innerHTML="";
+
+  const year=current.getFullYear();
+  const month=current.getMonth();
+
+  monthTitle.textContent=
+    `${year}年 ${month+1}月`;
+
+  const firstDay=
+    new Date(year,month,1).getDay();
+
+  const lastDate=
+    new Date(year,month+1,0).getDate();
+
+  const today=new Date();
+
+  for(let i=0;i<firstDay;i++){
+    const blank=document.createElement("div");
+    calendar.appendChild(blank);
+  }
+
+  const plans=loadPlans();
+
+  for(let day=1;day<=lastDate;day++){
+
+    const cell=document.createElement("div");
+    cell.className="day";
+
+    const number=document.createElement("div");
+    number.className="day-number";
+    number.textContent=day;
+
+    cell.appendChild(number);
+
+    if(
+      today.getFullYear()===year &&
+      today.getMonth()===month &&
+      today.getDate()===day
+    ){
+      cell.classList.add("today");
+    }
+
+    const k=key(new Date(year,month,day));
+
+    if(plans[k]){
+
+      if(filter==="ALL" || plans[k].member===filter){
+
+        const dot=document.createElement("div");
+        dot.className="dot";
+        dot.style.background=
+          members[plans[k].member].color;
+
+        cell.appendChild(dot);
+
+        const preview=document.createElement("div");
+        preview.className="plan-preview";
+        preview.textContent=plans[k].text;
+
+        cell.appendChild(preview);
+      }
+
+    }
+        cell.addEventListener("click",()=>{
+
+      const plans=loadPlans();
+
+      const k=key(new Date(year,month,day));
+
+      const old=plans[k];
+
+      const member=prompt(
+`メンバーを入力
+
+ALL
+SHORI
+FUMA
+SO
+TAKUTO
+YOSHITAKA
+MASAKI
+SHUTO
+TAIKI`,
+old ? old.member : "ALL"
+);
+
+      if(member===null) return;
+
+      if(!members[member]){
+        alert("メンバー名が違います");
+        return;
+      }
+
+      const text=prompt(
+        "予定を入力",
+        old ? old.text : ""
+      );
+
+      if(text===null) return;
+
+      if(text.trim()===""){
+        delete plans[k];
+      }else{
+        plans[k]={
+          member:member,
+          text:text
+        };
+      }
+
+      savePlans(plans);
+
+      renderCalendar();
+
+      showPlan(day);
+
+    });
+
+    calendar.appendChild(cell);
+
+  }
+
+}
+
+function showPlan(day){
+
+  const plans=loadPlans();
+
+  const k=key(
+    new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      day
+    )
+  );
+
+  if(!plans[k]){
+    planList.innerHTML=
+      `<p>${day}日の予定はありません</p>`;
+    return;
+  }
+
+  planList.innerHTML=`
+    <strong>${day}日</strong><br><br>
+
+    👤 ${plans[k].member}<br>
+
+    📝 ${plans[k].text}
+  `;
+}
+document.getElementById("prevMonth").addEventListener("click", () => {
+  current.setMonth(current.getMonth() - 1);
+  renderCalendar();
+  planList.innerHTML = "日付をタップすると予定が表示されます";
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+  current.setMonth(current.getMonth() + 1);
+  renderCalendar();
+  planList.innerHTML = "日付をタップすると予定が表示されます";
+});
+
+// メンバーフィルター
+document.querySelectorAll(".member-filter button").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    // ボタンの選択状態
+    document
+      .querySelectorAll(".member-filter button")
+      .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    filter = button.dataset.member;
+
+    renderCalendar();
+
+    planList.innerHTML = `
+      <p>${filter} の予定を表示中</p>
+    `;
+  });
+
+});
+
+// 初期表示
 renderCalendar();
+
+// ALLを最初に選択状態にする
+document
+  .querySelector('[data-member="ALL"]')
+  .classList.add("active");
