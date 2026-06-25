@@ -1,7 +1,7 @@
 const today = new Date().getDate();
 const calendar = document.querySelector(".calendar");
 const planBox = document.getElementById("planBox");
-
+console.log(planBox);
 calendar.innerHTML = "";
 
 const colors = {
