@@ -1,11 +1,80 @@
-<div class="header">📅 Schedule</div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timelesz Schedule</title>
 
-<div class="month-bar">
-  <button id="prev">←</button>
-  <div id="monthTitle"></div>
-  <button id="next">→</button>
-</div>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<div class="calendar"></div>
+<body>
 
-<script src="script.js"></script>
+  <!-- ヘッダー -->
+  <header class="header">
+    <h1>📅 Timelesz Schedule</h1>
+  </header>
+
+  <!-- 月切り替え -->
+  <div class="month-bar">
+    <button id="prevMonth">‹</button>
+
+    <div id="monthTitle">
+      2026年6月
+    </div>
+
+    <button id="nextMonth">›</button>
+  </div>
+
+  <!-- 曜日 -->
+  <div class="week">
+    <div>日</div>
+    <div>月</div>
+    <div>火</div>
+    <div>水</div>
+    <div>木</div>
+    <div>金</div>
+    <div>土</div>
+  </div>
+
+  <!-- カレンダー -->
+  <div id="calendar" class="calendar"></div>
+
+  <!-- メンバーフィルター -->
+  <div class="member-filter">
+
+    <button data-member="ALL">ALL</button>
+
+    <button data-member="SHORI">SHORI</button>
+
+    <button data-member="FUMA">FUMA</button>
+
+    <button data-member="SO">SO</button>
+
+    <button data-member="TAKUTO">TAKUTO</button>
+
+    <button data-member="YOSHITAKA">YOSHITAKA</button>
+
+    <button data-member="MASAKI">MASAKI</button>
+
+    <button data-member="SHUTO">SHUTO</button>
+
+    <button data-member="TAIKI">TAIKI</button>
+
+  </div>
+
+  <!-- 選択した日の予定 -->
+  <section class="plan-panel">
+
+    <h2>予定</h2>
+
+    <div id="planList">
+      日付をタップすると予定が表示されます
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
