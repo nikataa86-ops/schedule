@@ -30,8 +30,11 @@ for (let i = 1; i <= 31; i++) {
 
   // ⭐クリックイベントはここ！！
   day.addEventListener("click", () => {
-    planBox.innerHTML = `${i}日の予定はまだないよ`;
-  });
+  const text = prompt(`${i}日の予定を入力してね`);
+  if (text) {
+    planBox.innerHTML = `${i}日：${text}`;
+  }
+});
 
   if (i === today) {
     day.style.background = "rgba(0, 255, 200, 0.3)";
