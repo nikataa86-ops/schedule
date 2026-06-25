@@ -42,3 +42,10 @@ body{
   transform:scale(1.05);
   background: rgba(255,255,255,0.15);
 }
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#ff4d6d; /* とりあえず赤 */
+  margin-top:6px;
+}
