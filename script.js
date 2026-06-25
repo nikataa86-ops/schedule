@@ -1,7 +1,7 @@
 const today = new Date().getDate();
 const calendar = document.querySelector(".calendar");
 const planBox = document.getElementById("planBox");
-console.log(planBox);
+
 calendar.innerHTML = "";
 
 const colors = {
@@ -28,13 +28,13 @@ for (let i = 1; i <= 31; i++) {
   day.appendChild(num);
   day.appendChild(dot);
 
-  // ⭐クリックイベントはここ！！
+  // ★クリック（ここが重要）
   day.addEventListener("click", () => {
-  const text = prompt(`${i}日の予定を入力してね`);
-  if (text) {
-    planBox.innerHTML = `${i}日：${text}`;
-  }
-});
+    const text = prompt(`${i}日の予定を入力してね`);
+    if (text) {
+      planBox.innerHTML = `${i}日：${text}`;
+    }
+  });
 
   if (i === today) {
     day.style.background = "rgba(0, 255, 200, 0.3)";
