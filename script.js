@@ -85,14 +85,6 @@ function renderCalendar(){
           members[plans[k].member].color;
 
         cell.appendChild(dot);
-
-        const preview=document.createElement("div");
-        preview.className="plan-preview";
-        preview.textContent=plans[k].text;
-
-        cell.appendChild(preview);
-      }
-
     }
         cell.addEventListener("click",()=>{
 
