@@ -83,11 +83,11 @@ function renderCalendar(){
         dot.className="dot";
         dot.style.background=
           members[plans[k].member].color;
-
         cell.appendChild(dot);
+      }
     }
-        cell.addEventListener("click",()=>{
 
+    cell.addEventListener("click",()=>{
       const plans=loadPlans();
 
       const k=key(new Date(year,month,day));
