@@ -1,17 +1,17 @@
-const calendar = document.querySelector(".calendar");
+const calendar = document.getElementById("calendar");
 const monthTitle = document.getElementById("monthTitle");
 const planList = document.getElementById("planList");
 
 const members = {
-  ALL: { color: "#cbd5e1" },
-  SHORI: { color: "#fda4af" },
-  FUMA: { color: "#c4b5fd" },
-  SO: { color: "#86efac" },
-  TAKUTO: { color: "#93c5fd" },
-  YOSHITAKA: { color: "#bef264" },
-  MASAKI: { color: "#f9a8d4" },
-  SHUTO: { color: "#fde68a" },
-  TAIKI: { color: "#f3f4f6" }
+  ALL: { color:"#cbd5e1" },
+  SHORI: { color:"#fda4af" },
+  FUMA: { color:"#c4b5fd" },
+  SO: { color:"#86efac" },
+  TAKUTO: { color:"#93c5fd" },
+  YOSHITAKA: { color:"#bef264" },
+  MASAKI: { color:"#f9a8d4" },
+  SHUTO: { color:"#fde68a" },
+  TAIKI: { color:"#f3f4f6" }
 };
 
 let current = new Date();
@@ -31,30 +31,25 @@ function savePlans(data){
 
 function renderCalendar(){
 
-  calendar.innerHTML="";
+  calendar.innerHTML = "";
 
-  const year=current.getFullYear();
-  const month=current.getMonth();
+  const year = current.getFullYear();
+  const month = current.getMonth();
 
-  monthTitle.textContent=
-    `${year}年 ${month+1}月`;
+  monthTitle.textContent = `${year}年 ${month+1}月`;
 
-  const firstDay=
-    new Date(year,month,1).getDay();
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
 
-  const lastDate=
-    new Date(year,month+1,0).getDate();
-
-  const today=new Date();
+  const plans = loadPlans();
 
   for(let i=0;i<firstDay;i++){
     const blank=document.createElement("div");
     calendar.appendChild(blank);
   }
 
-  const plans=loadPlans();
-
-  for(let day=1;day<=lastDate;day++){
+  for(let day=1; day<=lastDate; day++){
 
     const cell=document.createElement("div");
     cell.className="day";
@@ -62,7 +57,6 @@ function renderCalendar(){
     const number=document.createElement("div");
     number.className="day-number";
     number.textContent=day;
-
     cell.appendChild(number);
 
     if(
@@ -73,30 +67,22 @@ function renderCalendar(){
       cell.classList.add("today");
     }
 
-    const k=key(new Date(year,month,day));
+    const k = key(new Date(year,month,day));
 
-if(plans[k]){
+    if(plans[k] && (filter==="ALL" || plans[k].member===filter)){
 
-  if(filter==="ALL" || plans[k].member===filter){
+      const dot=document.createElement("div");
+      dot.className="dot";
+      dot.style.background=members[plans[k].member].color;
+      cell.appendChild(dot);
+    }
+        cell.addEventListener("click",()=>{
 
-    const dot=document.createElement("div");
-    dot.className="dot";
-    dot.style.background=members[plans[k].member].color;
+      const plans = loadPlans();
+      const k = key(new Date(year,month,day));
+      const old = plans[k];
 
-    cell.appendChild(dot);
-
-  }   // ← filter の if
-
-}     // ← plans の if
-
-cell.addEventListener("click",()=>{
-      const plans=loadPlans();
-
-      const k=key(new Date(year,month,day));
-
-      const old=plans[k];
-
-      const member=prompt(
+      const member = prompt(
 `メンバーを入力
 
 ALL
@@ -109,7 +95,7 @@ MASAKI
 SHUTO
 TAIKI`,
 old ? old.member : "ALL"
-);
+      );
 
       if(member===null) return;
 
@@ -118,7 +104,7 @@ old ? old.member : "ALL"
         return;
       }
 
-      const text=prompt(
+      const text = prompt(
         "予定を入力",
         old ? old.text : ""
       );
@@ -144,10 +130,9 @@ old ? old.member : "ALL"
 
     calendar.appendChild(cell);
 
-  } // ← for (day) の終わり
+  }
 
-} // ← renderCalendar() の終わり
-
+}
 function showPlan(day){
 
   const plans = loadPlans();
@@ -177,16 +162,22 @@ function showPlan(day){
       <h3>${day}日</h3>
 
       <div class="member-row">
-        <span class="member-dot" style="background:${color}"></span>
+        <span class="member-dot"
+              style="background:${color}">
+        </span>
+
         ${plans[k].member}
+
       </div>
 
       <div class="plan-text">
         ${plans[k].text}
       </div>
+
     </div>
   `;
 }
+
 document.getElementById("prevMonth").addEventListener("click", () => {
   current.setMonth(current.getMonth() - 1);
   renderCalendar();
@@ -199,15 +190,13 @@ document.getElementById("nextMonth").addEventListener("click", () => {
   planList.innerHTML = "日付をタップすると予定が表示されます";
 });
 
-// メンバーフィルター
-document.querySelectorAll(".member-filter button").forEach(button => {
+document.querySelectorAll(".member-filter button").forEach(button=>{
 
-  button.addEventListener("click", () => {
+  button.addEventListener("click",()=>{
 
-    // ボタンの選択状態
     document
       .querySelectorAll(".member-filter button")
-      .forEach(btn => btn.classList.remove("active"));
+      .forEach(btn=>btn.classList.remove("active"));
 
     button.classList.add("active");
 
@@ -215,17 +204,12 @@ document.querySelectorAll(".member-filter button").forEach(button => {
 
     renderCalendar();
 
-    planList.innerHTML = `
-      <p>${filter} の予定を表示中</p>
-    `;
   });
 
 });
 
-// 初期表示
 renderCalendar();
 
-// ALLを最初に選択状態にする
 document
   .querySelector('[data-member="ALL"]')
   .classList.add("active");
