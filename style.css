@@ -232,3 +232,38 @@ button[data-member="TAIKI"]{
     transform:scale(1.05);
     box-shadow:0 0 10px rgba(255,255,255,.3);
 }
+/* 予定カード */
+
+.plan-card{
+  background:rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:16px;
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.plan-card h3{
+  margin-bottom:12px;
+  font-size:18px;
+}
+
+.member-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  font-weight:600;
+}
+
+.member-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.plan-text{
+  line-height:1.8;
+  font-size:15px;
+  color:#f3f4f6;
+}
