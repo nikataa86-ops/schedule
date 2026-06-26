@@ -1,4 +1,4 @@
-const calendar = document.getElementById("calendar");
+const calendar = document.querySelector(".calendar");
 const monthTitle = document.getElementById("monthTitle");
 const planList = document.getElementById("planList");
 
