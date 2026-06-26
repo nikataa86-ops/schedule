@@ -267,3 +267,102 @@ button[data-member="TAIKI"]{
   font-size:15px;
   color:#f3f4f6;
 }
+/* ===== モーダル ===== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-content{
+  width:90%;
+  max-width:360px;
+  background:rgba(25,25,25,.95);
+  backdrop-filter:blur(20px);
+  border-radius:24px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.modal-content h2{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.member-select{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.member-select button{
+  border:none;
+  border-radius:999px;
+  padding:8px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  color:#222;
+}
+
+/* パステルカラー */
+
+.member-select button[data-member="ALL"]{background:#cbd5e1;}
+.member-select button[data-member="SHORI"]{background:#fda4af;}
+.member-select button[data-member="FUMA"]{background:#c4b5fd;}
+.member-select button[data-member="SO"]{background:#86efac;}
+.member-select button[data-member="TAKUTO"]{background:#93c5fd;}
+.member-select button[data-member="YOSHITAKA"]{background:#bef264;}
+.member-select button[data-member="MASAKI"]{background:#f9a8d4;}
+.member-select button[data-member="SHUTO"]{background:#fde68a;}
+.member-select button[data-member="TAIKI"]{background:#f3f4f6;}
+
+.member-select button.selected{
+  outline:3px solid white;
+}
+
+#planInput{
+  width:100%;
+  height:100px;
+  border:none;
+  border-radius:16px;
+  padding:12px;
+  resize:none;
+  font-size:15px;
+  margin-bottom:18px;
+}
+
+.modal-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.modal-buttons button{
+  flex:1;
+  border:none;
+  border-radius:14px;
+  padding:12px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+#cancelBtn{
+  background:#444;
+  color:white;
+}
+
+#saveBtn{
+  background:#7dd3fc;
+  color:#111;
+  font-weight:bold;
+}
