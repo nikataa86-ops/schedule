@@ -156,6 +156,49 @@ old ? old.member : "ALL"
 
 function showPlan(day){
 
+  const plans = loadPlans();
+
+  const k = key(
+    new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      day
+    )
+  );
+
+  if(!plans[k]){
+    planList.innerHTML = `
+      <div class="plan-card">
+        <h3>${day}日</h3>
+        <p>予定はありません</p>
+      </div>
+    `;
+    return;
+  }
+
+  const color = members[plans[k].member].color;
+
+  planList.innerHTML = `
+    <div class="plan-card">
+
+      <h3>${day}日</h3>
+
+      <div class="member-row">
+        <span class="member-dot"
+          style="background:${color}">
+        </span>
+
+        ${plans[k].member}
+      </div>
+
+      <div class="plan-text">
+        ${plans[k].text}
+      </div>
+
+    </div>
+  `;
+}
+
   const plans=loadPlans();
 
   const k=key(
