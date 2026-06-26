@@ -73,7 +73,47 @@
     </div>
 
   </section>
+<!-- モーダル -->
+<div id="modal" class="modal">
 
+  <div class="modal-content">
+
+    <h2>予定を追加</h2>
+
+    <div class="member-select">
+
+      <button data-member="ALL">ALL</button>
+      <button data-member="SHORI">SHORI</button>
+      <button data-member="FUMA">FUMA</button>
+      <button data-member="SO">SO</button>
+      <button data-member="TAKUTO">TAKUTO</button>
+      <button data-member="YOSHITAKA">YOSHITAKA</button>
+      <button data-member="MASAKI">MASAKI</button>
+      <button data-member="SHUTO">SHUTO</button>
+      <button data-member="TAIKI">TAIKI</button>
+
+    </div>
+
+    <textarea
+      id="planInput"
+      placeholder="予定を入力..."
+    ></textarea>
+
+    <div class="modal-buttons">
+
+      <button id="cancelBtn">
+        キャンセル
+      </button>
+
+      <button id="saveBtn">
+        保存
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
   <script src="script.js"></script>
 
 </body>
