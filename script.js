@@ -75,19 +75,21 @@ function renderCalendar(){
 
     const k=key(new Date(year,month,day));
 
-    if(plans[k]){
+if(plans[k]){
 
-      if(filter==="ALL" || plans[k].member===filter){
+  if(filter==="ALL" || plans[k].member===filter){
 
-        const dot=document.createElement("div");
-        dot.className="dot";
-        dot.style.background=
-          members[plans[k].member].color;
-        cell.appendChild(dot);
-      }
-    }
+    const dot=document.createElement("div");
+    dot.className="dot";
+    dot.style.background=members[plans[k].member].color;
 
-    cell.addEventListener("click",()=>{
+    cell.appendChild(dot);
+
+  }   // ← filter の if
+
+}     // ← plans の if
+
+cell.addEventListener("click",()=>{
       const plans=loadPlans();
 
       const k=key(new Date(year,month,day));
