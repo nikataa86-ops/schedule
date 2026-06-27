@@ -1,120 +1,300 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timelesz Schedule</title>
 
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Timelesz Schedule</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-  <!-- ヘッダー -->
-  <header class="header">
-    <h1>📅 Timelesz Schedule</h1>
-  </header>
+<!-- ================= HEADER ================= -->
 
-  <!-- 月切り替え -->
-  <div class="month-bar">
+<header class="header">
+
+    <div class="logo">
+
+        <h1>timelesz</h1>
+
+        <span>Schedule</span>
+
+    </div>
+
+    <div class="header-icons">
+
+        <button id="searchBtn">🔍</button>
+
+        <button id="notifyBtn">🔔</button>
+
+    </div>
+
+</header>
+
+<!-- ================= MONTH ================= -->
+
+<section class="month-bar">
+
     <button id="prevMonth">‹</button>
 
-    <div id="monthTitle">
-      2026年6月
-    </div>
+    <h2 id="monthTitle"></h2>
 
     <button id="nextMonth">›</button>
-  </div>
 
-  <!-- 曜日 -->
-  <div class="week">
-    <div>日</div>
-    <div>月</div>
-    <div>火</div>
-    <div>水</div>
-    <div>木</div>
-    <div>金</div>
-    <div>土</div>
-  </div>
+</section>
 
-  <!-- カレンダー -->
-  <div id="calendar" class="calendar"></div>
+<!-- ================= WEEK ================= -->
 
-  <!-- メンバーフィルター -->
-  <div class="member-filter">
+<div class="week">
 
-    <button data-member="ALL">ALL</button>
-
-    <button data-member="SHORI">SHORI</button>
-
-    <button data-member="FUMA">FUMA</button>
-
-    <button data-member="SO">SO</button>
-
-    <button data-member="TAKUTO">TAKUTO</button>
-
-    <button data-member="YOSHITAKA">YOSHITAKA</button>
-
-    <button data-member="MASAKI">MASAKI</button>
-
-    <button data-member="SHUTO">SHUTO</button>
-
-    <button data-member="TAIKI">TAIKI</button>
-
-  </div>
-
-  <!-- 選択した日の予定 -->
-  <section class="plan-panel">
-
-    <h2>予定</h2>
-
-    <div id="planList">
-      日付をタップすると予定が表示されます
-    </div>
-
-  </section>
-<!-- モーダル -->
-<div id="modal" class="modal">
-
-  <div class="modal-content">
-
-    <h2>予定を追加</h2>
-
-    <div class="member-select">
-
-      <button data-member="ALL">ALL</button>
-      <button data-member="SHORI">SHORI</button>
-      <button data-member="FUMA">FUMA</button>
-      <button data-member="SO">SO</button>
-      <button data-member="TAKUTO">TAKUTO</button>
-      <button data-member="YOSHITAKA">YOSHITAKA</button>
-      <button data-member="MASAKI">MASAKI</button>
-      <button data-member="SHUTO">SHUTO</button>
-      <button data-member="TAIKI">TAIKI</button>
-
-    </div>
-
-    <textarea
-      id="planInput"
-      placeholder="予定を入力..."
-    ></textarea>
-
-    <div class="modal-buttons">
-
-      <button id="cancelBtn">
-        キャンセル
-      </button>
-
-      <button id="saveBtn">
-        保存
-      </button>
-
-    </div>
-
-  </div>
+<div>日</div>
+<div>月</div>
+<div>火</div>
+<div>水</div>
+<div>木</div>
+<div>金</div>
+<div>土</div>
 
 </div>
-  <script src="script.js"></script>
+
+<!-- ================= CALENDAR ================= -->
+
+<div id="calendar" class="calendar"></div>
+
+<!-- ================= MEMBER FILTER ================= -->
+
+<div class="member-filter">
+
+<button data-member="ALL">ALL</button>
+
+<button data-member="SHORI">SHORI</button>
+
+<button data-member="FUMA">FUMA</button>
+
+<button data-member="SO">SO</button>
+
+<button data-member="TAKUTO">TAKUTO</button>
+
+<button data-member="YOSHITAKA">YOSHITAKA</button>
+
+<button data-member="MASAKI">MASAKI</button>
+
+<button data-member="SHUTO">SHUTO</button>
+
+<button data-member="TAIKI">TAIKI</button>
+
+<button data-member="HIYOKO">🐥ひよこ組</button>
+
+</div>
+
+<!-- ================= PLAN ================= -->
+
+<section class="plan-panel">
+
+<h2 id="selectedDate">
+
+予定
+
+</h2>
+
+<div id="planList">
+
+日付をタップすると予定が表示されます
+
+</div>
+
+</section>
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal" class="modal hidden">
+
+<div class="modal-content">
+
+<h2>
+
+予定を追加
+
+</h2>
+
+<label>
+
+カテゴリ
+
+</label>
+
+<select id="category">
+
+<option>📺 テレビ</option>
+
+<option>📻 ラジオ</option>
+
+<option>🎤 ライブ</option>
+
+<option>🎭 舞台・ミュージカル</option>
+
+<option>🎬 映画</option>
+
+<option>📱 サブスク配信</option>
+
+<option>💌 FC更新</option>
+
+<option>🐥 ひよこ組</option>
+
+<option>📖 雑誌</option>
+
+<option>🎂 誕生日</option>
+
+<option>🏷️ 結成日</option>
+
+<option>📢 お知らせ</option>
+
+<option>🎉 イベント</option>
+
+<option>📹 YouTube</option>
+
+<option>📷 Instagram</option>
+
+<option>🎵 TikTok</option>
+
+<option>🐦 X</option>
+
+</select>
+
+<label>
+
+メンバー
+
+</label>
+
+<select id="member">
+
+<option value="ALL">ALL</option>
+
+<option value="SHORI">SHORI</option>
+
+<option value="FUMA">FUMA</option>
+
+<option value="SO">SO</option>
+
+<option value="TAKUTO">TAKUTO</option>
+
+<option value="YOSHITAKA">YOSHITAKA</option>
+
+<option value="MASAKI">MASAKI</option>
+
+<option value="SHUTO">SHUTO</option>
+
+<option value="TAIKI">TAIKI</option>
+
+<option value="HIYOKO">🐥ひよこ組</option>
+
+</select>
+
+<label>
+
+タイトル
+
+</label>
+
+<input id="titleInput" type="text">
+
+<label>
+
+時間
+
+</label>
+
+<input id="timeInput" type="time">
+
+<label>
+
+場所
+
+</label>
+
+<input id="placeInput" type="text">
+
+<label>
+
+リンク
+
+</label>
+
+<input id="linkInput" type="url">
+
+<label>
+
+メモ
+
+</label>
+
+<textarea id="memoInput"></textarea>
+
+<div class="modal-buttons">
+
+<button id="deleteBtn">
+
+削除
+
+</button>
+
+<button id="saveBtn">
+
+保存
+
+</button>
+
+<button id="closeBtn">
+
+閉じる
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= LINKS ================= -->
+
+<section class="link-panel">
+
+<h2>
+
+リンク
+
+</h2>
+
+<div class="links">
+
+<a href="#">💌 FC</a>
+
+<a href="#">▶️ YouTube</a>
+
+<a href="#">📷 Instagram</a>
+
+<a href="#">🎵 TikTok</a>
+
+<a href="#">🐦 X</a>
+
+<a href="#">💬 LINE</a>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
 
 </body>
 </html>
