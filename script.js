@@ -213,3 +213,313 @@ renderCalendar();
 document
   .querySelector('[data-member="ALL"]')
   .classList.add("active");
+// ---------- 保存 ----------
+
+saveBtn.addEventListener("click",()=>{
+
+const plans=loadPlans();
+
+if(!plans[selectedKey]){
+
+plans[selectedKey]=[];
+
+}
+
+const data={
+
+member:memberInput.value,
+
+category:categoryInput.value,
+
+title:titleInput.value,
+
+time:timeInput.value,
+
+place:placeInput.value,
+
+link:linkInput.value,
+
+memo:memoInput.value
+
+};
+
+if(editIndex>=0){
+
+plans[selectedKey][editIndex]=data;
+
+}else{
+
+plans[selectedKey].push(data);
+
+}
+
+savePlans(plans);
+
+closeModal();
+
+renderCalendar();
+
+const d=Number(selectedKey.split("-")[2]);
+
+showPlan(d);
+
+});
+
+// ---------- 削除 ----------
+
+deleteBtn.addEventListener("click",()=>{
+
+if(editIndex<0){
+
+closeModal();
+
+return;
+
+}
+
+const plans=loadPlans();
+
+plans[selectedKey].splice(editIndex,1);
+
+if(plans[selectedKey].length===0){
+
+delete plans[selectedKey];
+
+}
+
+savePlans(plans);
+
+closeModal();
+
+renderCalendar();
+
+const d=Number(selectedKey.split("-")[2]);
+
+showPlan(d);
+
+});
+
+// ---------- 編集ボタン ----------
+
+document.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("editPlan")){
+
+const index=Number(e.target.dataset.index);
+
+openModal(selectedKey,index);
+
+}
+
+if(e.target.id==="addPlan"){
+
+openModal(selectedKey);
+
+}
+
+});
+
+// ---------- 前月 ----------
+
+document.getElementById("prevMonth").addEventListener("click",()=>{
+
+current.setMonth(current.getMonth()-1);
+
+renderCalendar();
+
+planList.innerHTML="日付をタップすると予定が表示されます";
+
+});
+
+// ---------- 次月 ----------
+
+document.getElementById("nextMonth").addEventListener("click",()=>{
+
+current.setMonth(current.getMonth()+1);
+
+renderCalendar();
+
+planList.innerHTML="日付をタップすると予定が表示されます";
+
+});
+
+// ---------- Today ----------
+
+document.getElementById("todayBtn").addEventListener("click",()=>{
+
+current=new Date();
+
+renderCalendar();
+
+});
+
+// ---------- モーダル外 ----------
+
+modal.addEventListener("click",(e)=>{
+
+if(e.target===modal){
+
+closeModal();
+
+}
+
+});
+
+// ---------- ESC ----------
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key==="Escape"){
+
+closeModal();
+
+}
+
+});
+
+// ---------- フィルター ----------
+
+document.querySelectorAll(".member-filter button").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+document.querySelectorAll(".member-filter button")
+
+.forEach(b=>b.classList.remove("active"));
+
+btn.classList.add("active");
+
+filter=btn.dataset.member;
+
+renderCalendar();
+
+planList.innerHTML=`
+<div class="plan-card">
+フィルター：
+<strong>${filter}</strong>
+</div>
+`;
+
+});
+
+});
+
+// ---------- 初期表示 ----------
+
+renderCalendar();
+
+document
+.querySelector('[data-member="ALL"]')
+.classList.add("active");
+
+planList.innerHTML=`
+<div class="plan-card">
+<h3>Timelesz Schedule</h3>
+<p>
+日付をタップすると予定を追加できます。
+</p>
+</div>
+`;
+// ========================================
+// LINKボタン（変更してOK）
+// ========================================
+
+document.getElementById("fcLink").href =
+"https://familyclub.jp/";
+
+document.getElementById("ytLink").href =
+"https://www.youtube.com/";
+
+document.getElementById("instaLink").href =
+"https://www.instagram.com/";
+
+document.getElementById("tiktokLink").href =
+"https://www.tiktok.com/";
+
+document.getElementById("xLink").href =
+"https://x.com/";
+
+document.getElementById("lineLink").href =
+"https://line.me/";
+
+// ========================================
+// 日付ダブルタップで予定追加
+// ========================================
+
+let lastTap = 0;
+
+calendar.addEventListener("click",(e)=>{
+
+const dayCell=e.target.closest(".day");
+
+if(!dayCell) return;
+
+const now=Date.now();
+
+if(now-lastTap<300){
+
+const day=Number(
+dayCell.querySelector(".day-number").textContent
+);
+
+const k=key(
+new Date(
+current.getFullYear(),
+current.getMonth(),
+day
+)
+);
+
+openModal(k);
+
+}
+
+lastTap=now;
+
+});
+
+// ========================================
+// 今日の日付までスクロール
+// ========================================
+
+function scrollToday(){
+
+const today=document.querySelector(".today");
+
+if(today){
+
+today.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
+
+}
+
+}
+
+setTimeout(scrollToday,300);
+
+// ========================================
+// 自動バックアップ
+// ========================================
+
+window.addEventListener("beforeunload",()=>{
+
+const plans=loadPlans();
+
+savePlans(plans);
+
+});
+
+// ========================================
+// バージョン表示
+// ========================================
+
+console.log("Timelesz Schedule Ver.3 Loaded");
+
+// ========================================
+// End
+// ========================================
