@@ -1,164 +1,282 @@
+// ======================================
+// Timelesz Schedule v2
+// script.js
+// ======================================
+
 const calendar = document.getElementById("calendar");
 const monthTitle = document.getElementById("monthTitle");
 const planList = document.getElementById("planList");
+const selectedDate = document.getElementById("selectedDate");
+
+const modal = document.getElementById("modal");
+
+const saveBtn = document.getElementById("saveBtn");
+const closeBtn = document.getElementById("closeBtn");
+const deleteBtn = document.getElementById("deleteBtn");
+
+const memberInput = document.getElementById("member");
+const categoryInput = document.getElementById("category");
+const titleInput = document.getElementById("titleInput");
+const timeInput = document.getElementById("timeInput");
+const placeInput = document.getElementById("placeInput");
+const linkInput = document.getElementById("linkInput");
+const memoInput = document.getElementById("memoInput");
 
 const members = {
-  ALL: { color: "#cbd5e1" },
-  SHORI: { color: "#fda4af" },
-  FUMA: { color: "#c4b5fd" },
-  SO: { color: "#86efac" },
-  TAKUTO: { color: "#93c5fd" },
-  YOSHITAKA: { color: "#bef264" },
-  MASAKI: { color: "#f9a8d4" },
-  SHUTO: { color: "#fde68a" },
-  TAIKI: { color: "#f3f4f6" }
+
+ALL:"#cbd5e1",
+
+SHORI:"#fca5a5",
+
+FUMA:"#d8b4fe",
+
+SO:"#86efac",
+
+TAKUTO:"#93c5fd",
+
+YOSHITAKA:"#bef264",
+
+MASAKI:"#f9a8d4",
+
+SHUTO:"#fde68a",
+
+TAIKI:"#f8fafc",
+
+HIYOKO:"#fff176"
+
 };
 
-let current = new Date();
-let filter = "ALL";
+let current=new Date();
+
+let filter="ALL";
+
+let selectedKey=null;
 
 function key(date){
-  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+
+return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+
 }
 
 function loadPlans(){
-  return JSON.parse(localStorage.getItem("plans") || "{}");
+
+return JSON.parse(localStorage.getItem("plans")||"{}");
+
 }
 
 function savePlans(data){
-  localStorage.setItem("plans", JSON.stringify(data));
+
+localStorage.setItem("plans",JSON.stringify(data));
+
 }
+
+function openModal(dateKey){
+
+selectedKey=dateKey;
+
+const plans=loadPlans();
+
+const old=plans[dateKey];
+
+if(old){
+
+memberInput.value=old.member;
+
+categoryInput.value=old.category;
+
+titleInput.value=old.title;
+
+timeInput.value=old.time;
+
+placeInput.value=old.place;
+
+linkInput.value=old.link;
+
+memoInput.value=old.memo;
+
+}else{
+
+memberInput.value="ALL";
+
+categoryInput.selectedIndex=0;
+
+titleInput.value="";
+
+timeInput.value="";
+
+placeInput.value="";
+
+linkInput.value="";
+
+memoInput.value="";
+
+}
+
+modal.classList.remove("hidden");
+
+}
+
+function closeModal(){
+
+modal.classList.add("hidden");
+
+}
+
+closeBtn.onclick=closeModal;
 
 function renderCalendar(){
 
-  calendar.innerHTML="";
+calendar.innerHTML="";
 
-  const year=current.getFullYear();
-  const month=current.getMonth();
+const year=current.getFullYear();
 
-  monthTitle.textContent=
-    `${year}年 ${month+1}月`;
+const month=current.getMonth();
 
-  const firstDay=
-    new Date(year,month,1).getDay();
+monthTitle.textContent=`${year}年 ${month+1}月`;
 
-  const lastDate=
-    new Date(year,month+1,0).getDate();
+const firstDay=new Date(year,month,1).getDay();
 
-  const today=new Date();
+const lastDate=new Date(year,month+1,0).getDate();
 
-  for(let i=0;i<firstDay;i++){
-    const blank=document.createElement("div");
-    calendar.appendChild(blank);
-  }
+const today=new Date();
 
-  const plans=loadPlans();
+const plans=loadPlans();
 
-  for(let day=1;day<=lastDate;day++){
+for(let i=0;i<firstDay;i++){
 
-    const cell=document.createElement("div");
-    cell.className="day";
+const blank=document.createElement("div");
 
-    const number=document.createElement("div");
-    number.className="day-number";
-    number.textContent=day;
-
-    cell.appendChild(number);
-
-    if(
-      today.getFullYear()===year &&
-      today.getMonth()===month &&
-      today.getDate()===day
-    ){
-      cell.classList.add("today");
-    }
-
-    const k=key(new Date(year,month,day));
-
-    if(plans[k]){
-
-      if(filter==="ALL" || plans[k].member===filter){
-
-        const dot=document.createElement("div");
-        dot.className="dot";
-        dot.style.background=
-          members[plans[k].member].color;
-
-        cell.appendChild(dot);
-
-        const preview=document.createElement("div");
-        preview.className="plan-preview";
-        preview.textContent=plans[k].text;
-
-        cell.appendChild(preview);
-      }
-
-    }
-        cell.addEventListener("click",()=>{
-
-      const plans=loadPlans();
-
-      const k=key(new Date(year,month,day));
-
-      const old=plans[k];
-
-      const member=prompt(
-`メンバーを入力
-
-ALL
-SHORI
-FUMA
-SO
-TAKUTO
-YOSHITAKA
-MASAKI
-SHUTO
-TAIKI`,
-old ? old.member : "ALL"
-);
-
-      if(member===null) return;
-
-      if(!members[member]){
-        alert("メンバー名が違います");
-        return;
-      }
-
-      const text=prompt(
-        "予定を入力",
-        old ? old.text : ""
-      );
-
-      if(text===null) return;
-
-      if(text.trim()===""){
-        delete plans[k];
-      }else{
-        plans[k]={
-          member:member,
-          text:text
-        };
-      }
-
-      savePlans(plans);
-
-      renderCalendar();
-
-      showPlan(day);
-
-    });
-
-    calendar.appendChild(cell);
-
-  }
+calendar.appendChild(blank);
 
 }
 
+for(let day=1;day<=lastDate;day++){
+
+const cell=document.createElement("div");
+
+cell.className="day";
+
+const number=document.createElement("div");
+
+number.className="day-number";
+
+number.textContent=day;
+
+cell.appendChild(number);
+
+if(
+
+today.getFullYear()===year&&
+
+today.getMonth()===month&&
+
+today.getDate()===day
+
+){
+
+cell.classList.add("today");
+
+}
+
+const k=key(new Date(year,month,day));
+
+if(plans[k]){
+
+const p=plans[k];
+
+if(filter==="ALL"||p.member===filter){
+
+cell.classList.add("border-"+p.member);
+
+const dot=document.createElement("div");
+
+dot.className="dot";
+
+dot.style.background=members[p.member];
+
+cell.appendChild(dot);
+
+}
+
+}
+
+cell.onclick=()=>{
+
+openModal(k);
+
+showPlan(day);
+
+};
+
+calendar.appendChild(cell);
+
+}
+
+}
+// ===============================
+// 保存
+// ===============================
+
+saveBtn.onclick = () => {
+
+  const plans = loadPlans();
+
+  plans[selectedKey] = {
+
+    member: memberInput.value,
+
+    category: categoryInput.value,
+
+    title: titleInput.value,
+
+    time: timeInput.value,
+
+    place: placeInput.value,
+
+    link: linkInput.value,
+
+    memo: memoInput.value
+
+  };
+
+  savePlans(plans);
+
+  closeModal();
+
+  renderCalendar();
+
+};
+
+// ===============================
+// 削除
+// ===============================
+
+deleteBtn.onclick = () => {
+
+  const plans = loadPlans();
+
+  delete plans[selectedKey];
+
+  savePlans(plans);
+
+  closeModal();
+
+  renderCalendar();
+
+  planList.innerHTML =
+    "日付をタップすると予定が表示されます";
+
+};
+
+// ===============================
+// 下の予定カード
+// ===============================
+
 function showPlan(day){
 
-  const plans=loadPlans();
+  const plans = loadPlans();
 
-  const k=key(
+  const k = key(
     new Date(
       current.getFullYear(),
       current.getMonth(),
@@ -166,59 +284,184 @@ function showPlan(day){
     )
   );
 
+  selectedDate.textContent = `${day}日の予定`;
+
   if(!plans[k]){
-    planList.innerHTML=
-      `<p>${day}日の予定はありません</p>`;
+
+    planList.innerHTML = `
+      <div class="plan-card">
+        <p>予定はありません</p>
+      </div>
+    `;
+
     return;
+
   }
 
-  planList.innerHTML=`
-    <strong>${day}日</strong><br><br>
+  const p = plans[k];
 
-    👤 ${plans[k].member}<br>
+  const color = members[p.member];
 
-    📝 ${plans[k].text}
+  planList.innerHTML = `
+
+    <div class="plan-card">
+
+      <div class="member-row">
+
+        <span
+          class="member-dot"
+          style="background:${color}">
+        </span>
+
+        <strong>${p.member}</strong>
+
+      </div>
+
+      <p><strong>${p.category}</strong></p>
+
+      <p>${p.title}</p>
+
+      ${p.time ? `<p>🕒 ${p.time}</p>` : ""}
+
+      ${p.place ? `<p>📍 ${p.place}</p>` : ""}
+
+      ${p.link ? `
+      <p>
+        🔗
+        <a href="${p.link}"
+           target="_blank">
+           リンクを開く
+        </a>
+      </p>` : ""}
+
+      ${p.memo ? `<p>${p.memo}</p>` : ""}
+
+    </div>
+
   `;
+
 }
-document.getElementById("prevMonth").addEventListener("click", () => {
-  current.setMonth(current.getMonth() - 1);
-  renderCalendar();
-  planList.innerHTML = "日付をタップすると予定が表示されます";
-});
 
-document.getElementById("nextMonth").addEventListener("click", () => {
-  current.setMonth(current.getMonth() + 1);
-  renderCalendar();
-  planList.innerHTML = "日付をタップすると予定が表示されます";
-});
+// ===============================
+// 月送り
+// ===============================
 
+document
+.getElementById("prevMonth")
+.onclick = () => {
+
+  current.setMonth(
+    current.getMonth()-1
+  );
+
+  renderCalendar();
+
+};
+
+document
+.getElementById("nextMonth")
+.onclick = () => {
+
+  current.setMonth(
+    current.getMonth()+1
+  );
+
+  renderCalendar();
+
+};
+// ===============================
 // メンバーフィルター
-document.querySelectorAll(".member-filter button").forEach(button => {
+// ===============================
 
-  button.addEventListener("click", () => {
+document
+.querySelectorAll(".member-filter button")
+.forEach(button=>{
 
-    // ボタンの選択状態
+  button.onclick=()=>{
+
     document
-      .querySelectorAll(".member-filter button")
-      .forEach(btn => btn.classList.remove("active"));
+    .querySelectorAll(".member-filter button")
+    .forEach(btn=>btn.classList.remove("active"));
 
     button.classList.add("active");
 
-    filter = button.dataset.member;
+    filter=button.dataset.member;
 
     renderCalendar();
 
-    planList.innerHTML = `
-      <p>${filter} の予定を表示中</p>
-    `;
-  });
+    planList.innerHTML=
+      "日付をタップすると予定が表示されます";
+
+  };
 
 });
 
+// ===============================
+// モーダル外タップで閉じる
+// ===============================
+
+modal.addEventListener("click",(e)=>{
+
+  if(e.target===modal){
+
+    closeModal();
+
+  }
+
+});
+
+// ===============================
+// ESCキーで閉じる
+// ===============================
+
+document.addEventListener("keydown",(e)=>{
+
+  if(e.key==="Escape"){
+
+    closeModal();
+
+  }
+
+});
+
+// ===============================
+// 今日へ戻る（ダブルタップ）
+// ===============================
+
+monthTitle.addEventListener("dblclick",()=>{
+
+  current=new Date();
+
+  renderCalendar();
+
+});
+
+// ===============================
 // 初期表示
+// ===============================
+
 renderCalendar();
 
-// ALLを最初に選択状態にする
+// ALLを最初から選択状態
+
 document
-  .querySelector('[data-member="ALL"]')
-  .classList.add("active");
+.querySelector('[data-member="ALL"]')
+.classList.add("active");
+
+// 初期メッセージ
+
+planList.innerHTML=`
+
+<div class="plan-card">
+
+<h3>📅 Timelesz Schedule</h3>
+
+<p>
+
+日付をタップすると予定を追加・編集できます。
+
+</p>
+
+</div>
+
+`;
