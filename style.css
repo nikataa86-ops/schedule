@@ -1,6 +1,7 @@
-/* =========================================
-   Timelesz Schedule Ver.3
-========================================= */
+/* ===================================================
+   Timelesz Schedule v2
+   Style.css
+=================================================== */
 
 *{
   margin:0;
@@ -10,13 +11,13 @@
 
 :root{
 
-  --bg:#0f0f12;
-  --card:rgba(255,255,255,.07);
-  --glass:rgba(255,255,255,.05);
+  --bg:#111111;
+  --glass:rgba(255,255,255,.06);
+  --glass2:rgba(255,255,255,.08);
   --text:#ffffff;
-  --sub:#a1a1aa;
+  --sub:#9ca3af;
 
-  --all:#d1d5db;
+  --all:#cbd5e1;
   --shori:#fca5a5;
   --fuma:#d8b4fe;
   --so:#86efac;
@@ -24,18 +25,14 @@
   --yoshitaka:#bef264;
   --masaki:#f9a8d4;
   --shuto:#fde68a;
-  --hiyoko:#fff59d;
-  --taiki:#ffffff;
+  --taiki:#f8fafc;
+  --hiyoko:#fff176;
 
 }
 
 body{
 
-  background:linear-gradient(
-      180deg,
-      #0d0d10,
-      #18181b
-  );
+  background:var(--bg);
 
   color:var(--text);
 
@@ -45,7 +42,7 @@ body{
 
 }
 
-/* Header */
+/* ================= Header ================= */
 
 .header{
 
@@ -55,37 +52,39 @@ body{
 
   z-index:100;
 
+  backdrop-filter:blur(20px);
+
+  background:rgba(17,17,17,.75);
+
+  border-bottom:1px solid rgba(255,255,255,.05);
+
+  padding:20px;
+
   display:flex;
 
   justify-content:space-between;
 
   align-items:center;
 
-  padding:22px;
-
-  backdrop-filter:blur(18px);
-
-  background:rgba(17,17,17,.65);
-
 }
 
 .logo h1{
 
-  font-size:25px;
+  font-size:24px;
 
   font-weight:700;
 
 }
 
-.logo p{
+.logo span{
 
-  color:#999;
+  color:#9ca3af;
 
   font-size:13px;
 
 }
 
-.header-buttons{
+.header-icons{
 
   display:flex;
 
@@ -93,13 +92,7 @@ body{
 
 }
 
-.header-buttons button{
-
-  border:none;
-
-  background:var(--glass);
-
-  color:white;
+.header-icons button{
 
   width:42px;
 
@@ -107,11 +100,17 @@ body{
 
   border-radius:50%;
 
-  backdrop-filter:blur(20px);
+  border:none;
+
+  color:white;
+
+  background:var(--glass);
+
+  backdrop-filter:blur(12px);
 
 }
 
-/* Month */
+/* ================= Month ================= */
 
 .month-bar{
 
@@ -141,15 +140,15 @@ body{
 
   border-radius:50%;
 
-  background:var(--glass);
-
   color:white;
 
-  font-size:24px;
+  background:var(--glass);
+
+  font-size:22px;
 
 }
 
-/* Week */
+/* ================= Week ================= */
 
 .week{
 
@@ -157,17 +156,15 @@ body{
 
   grid-template-columns:repeat(7,1fr);
 
-  text-align:center;
+  padding:0 10px 10px;
 
   color:#888;
 
-  padding:0 12px 12px;
-
-  font-size:13px;
+  text-align:center;
 
 }
 
-/* Calendar */
+/* ================= Calendar ================= */
 
 .calendar{
 
@@ -183,15 +180,13 @@ body{
 
 .day{
 
-  min-height:92px;
+  min-height:90px;
 
-  border-radius:22px;
+  border-radius:20px;
 
-  background:var(--card);
+  background:var(--glass);
 
-  backdrop-filter:blur(25px);
-
-  border:2px solid transparent;
+  backdrop-filter:blur(20px);
 
   display:flex;
 
@@ -203,19 +198,13 @@ body{
 
   transition:.25s;
 
+  border:2px solid transparent;
+
 }
 
 .day:active{
 
-  transform:scale(.95);
-
-}
-
-.day-number{
-
-  font-size:15px;
-
-  font-weight:700;
+  transform:scale(.96);
 
 }
 
@@ -223,272 +212,392 @@ body{
 
 .today{
 
-  box-shadow:
-  0 0 18px rgba(255,255,255,.20);
+  box-shadow:0 0 20px rgba(255,255,255,.18);
 
 }
 
-/* メンカラ外枠 */
+/* メンバーカラー枠 */
 
-.border-ALL{border-color:var(--all);}
-.border-SHORI{border-color:var(--shori);}
-.border-FUMA{border-color:var(--fuma);}
-.border-SO{border-color:var(--so);}
-.border-TAKUTO{border-color:var(--takuto);}
-.border-YOSHITAKA{border-color:var(--yoshitaka);}
-.border-MASAKI{border-color:var(--masaki);}
-.border-SHUTO{border-color:var(--shuto);}
-.border-TAIKI{border-color:var(--taiki);}
-.border-HIYOKO{border-color:var(--hiyoko);}
+.border-ALL{
+
+  border-color:var(--all);
+
+}
+
+.border-SHORI{
+
+  border-color:var(--shori);
+
+}
+
+.border-FUMA{
+
+  border-color:var(--fuma);
+
+}
+
+.border-SO{
+
+  border-color:var(--so);
+
+}
+
+.border-TAKUTO{
+
+  border-color:var(--takuto);
+
+}
+
+.border-YOSHITAKA{
+
+  border-color:var(--yoshitaka);
+
+}
+
+.border-MASAKI{
+
+  border-color:var(--masaki);
+
+}
+
+.border-SHUTO{
+
+  border-color:var(--shuto);
+
+}
+
+.border-TAIKI{
+
+  border-color:var(--taiki);
+
+}
+
+.border-HIYOKO{
+
+  border-color:var(--hiyoko);
+
+}
+
+/* 日付 */
+
+.day-number{
+
+  font-weight:700;
+
+  font-size:15px;
+
+}
 
 /* メンカラ丸 */
 
-.dot-wrap{
-
-  display:flex;
-
-  gap:4px;
-
-  margin-top:10px;
-
-  flex-wrap:wrap;
-
-  justify-content:center;
-
-}
-
 .dot{
 
-  width:9px;
+  width:10px;
 
-  height:9px;
+  height:10px;
 
   border-radius:50%;
 
+  margin-top:10px;
+
 }
 
-/* 予定文字は表示しない */
+/* 予定は表示しない */
 
 .plan-preview{
 
   display:none;
 
 }
-/* ================= FILTER ================= */
+
+/* ================= Filter ================= */
 
 .member-filter{
 
-display:flex;
+  display:flex;
 
-gap:10px;
+  overflow-x:auto;
 
-overflow-x:auto;
+  gap:10px;
 
-padding:16px 14px;
+  padding:15px;
 
-scrollbar-width:none;
+  scrollbar-width:none;
 
 }
 
 .member-filter::-webkit-scrollbar{
 
-display:none;
+  display:none;
 
 }
 
 .member-filter button{
 
-flex:none;
+  flex:none;
 
-padding:10px 18px;
+  padding:9px 16px;
 
-border-radius:999px;
+  border-radius:999px;
 
-background:transparent;
+  background:transparent;
 
-color:#fff;
+  color:white;
 
-font-size:13px;
+  border:2px solid white;
 
-font-weight:600;
+  font-size:13px;
 
-border:2px solid rgba(255,255,255,.15);
+  transition:.25s;
 
-transition:.25s;
+}
+
+/* ALL */
+
+button[data-member="ALL"]{
+
+  border-color:var(--all);
+
+}
+
+/* SHORI */
+
+button[data-member="SHORI"]{
+
+  border-color:var(--shori);
+
+}
+
+/* FUMA */
+
+button[data-member="FUMA"]{
+
+  border-color:var(--fuma);
+
+}
+
+/* SO */
+
+button[data-member="SO"]{
+
+  border-color:var(--so);
+
+}
+
+/* TAKUTO */
+
+button[data-member="TAKUTO"]{
+
+  border-color:var(--takuto);
+
+}
+
+/* YOSHITAKA */
+
+button[data-member="YOSHITAKA"]{
+
+  border-color:var(--yoshitaka);
+
+}
+
+/* MASAKI */
+
+button[data-member="MASAKI"]{
+
+  border-color:var(--masaki);
+
+}
+
+/* SHUTO */
+
+button[data-member="SHUTO"]{
+
+  border-color:var(--shuto);
+
+}
+
+/* TAIKI */
+
+button[data-member="TAIKI"]{
+
+  border-color:var(--taiki);
+
+}
+
+/* HIYOKO */
+
+button[data-member="HIYOKO"]{
+
+  border-color:var(--hiyoko);
 
 }
 
 .member-filter button.active{
 
-background:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.08);
 
-transform:scale(1.05);
+  transform:scale(1.05);
 
 }
-
-button[data-member="ALL"]{border-color:var(--all);}
-button[data-member="SHORI"]{border-color:var(--shori);}
-button[data-member="FUMA"]{border-color:var(--fuma);}
-button[data-member="SO"]{border-color:var(--so);}
-button[data-member="TAKUTO"]{border-color:var(--takuto);}
-button[data-member="YOSHITAKA"]{border-color:var(--yoshitaka);}
-button[data-member="MASAKI"]{border-color:var(--masaki);}
-button[data-member="SHUTO"]{border-color:var(--shuto);}
-button[data-member="TAIKI"]{border-color:var(--taiki);}
-button[data-member="HIYOKO"]{border-color:var(--hiyoko);}
-
-/* ================= PLAN ================= */
+/* ================= Plan Panel ================= */
 
 .plan-panel{
 
-margin:18px;
+    margin:18px;
 
-padding:20px;
+    padding:18px;
 
-border-radius:26px;
+    border-radius:24px;
 
-background:var(--card);
+    background:var(--glass);
 
-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.05);
 
 }
 
 .plan-panel h2{
 
-margin-bottom:15px;
+    margin-bottom:14px;
 
-font-size:20px;
+    font-size:20px;
 
 }
 
+#planList{
+
+    color:#ddd;
+
+    line-height:1.8;
+
+}
+
+/* ================= Plan Card ================= */
+
 .plan-card{
 
-background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
-border-radius:18px;
+    border-radius:20px;
 
-padding:18px;
+    padding:18px;
 
-border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.06);
+
+}
+
+.plan-card h3{
+
+    margin-bottom:14px;
 
 }
 
 .member-row{
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    align-items:center;
 
-gap:10px;
+    gap:10px;
 
-margin-bottom:14px;
+    margin-bottom:12px;
 
 }
 
 .member-dot{
 
-width:12px;
+    width:12px;
 
-height:12px;
+    height:12px;
 
-border-radius:50%;
-
-}
-
-.plan-title{
-
-font-size:18px;
-
-font-weight:700;
-
-margin-bottom:10px;
+    border-radius:50%;
 
 }
 
-.plan-category{
+.plan-text{
 
-color:#cbd5e1;
+    line-height:1.8;
 
-margin-bottom:8px;
-
-}
-
-.plan-time,
-.plan-place,
-.plan-link,
-.plan-memo{
-
-margin-top:8px;
-
-line-height:1.7;
+    color:#f3f4f6;
 
 }
 
-/* ================= MODAL ================= */
+/* ================= Modal ================= */
 
 .modal{
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-display:flex;
+    background:rgba(0,0,0,.55);
 
-justify-content:center;
+    display:flex;
 
-align-items:flex-end;
+    justify-content:center;
 
-background:rgba(0,0,0,.6);
+    align-items:flex-end;
 
-z-index:999;
+    z-index:999;
 
 }
 
 .hidden{
 
-display:none;
+    display:none;
 
 }
 
 .modal-content{
 
-width:100%;
+    width:100%;
 
-max-width:520px;
+    max-width:520px;
 
-background:#18181b;
+    background:#181818;
 
-border-radius:30px 30px 0 0;
+    border-radius:30px 30px 0 0;
 
-padding:24px;
+    padding:25px;
 
-animation:slideUp .25s ease;
-
-}
-
-@keyframes slideUp{
-
-from{
-
-transform:translateY(100%);
+    animation:up .25s;
 
 }
 
-to{
+@keyframes up{
 
-transform:translateY(0);
+    from{
+
+        transform:translateY(100%);
+
+    }
+
+    to{
+
+        transform:translateY(0);
+
+    }
 
 }
+
+.modal-content h2{
+
+    text-align:center;
+
+    margin-bottom:22px;
 
 }
 
 .modal-content label{
 
-display:block;
+    display:block;
 
-margin:14px 0 8px;
+    margin-top:15px;
 
-font-size:14px;
+    margin-bottom:8px;
+
+    font-size:14px;
 
 }
 
@@ -496,127 +605,127 @@ font-size:14px;
 .modal-content textarea,
 .modal-content select{
 
-width:100%;
+    width:100%;
 
-padding:12px;
+    border:none;
 
-border:none;
+    outline:none;
 
-border-radius:14px;
+    border-radius:14px;
 
-background:rgba(255,255,255,.08);
+    padding:12px;
 
-color:white;
+    background:rgba(255,255,255,.08);
 
-font-size:15px;
+    color:white;
 
-outline:none;
+    font-size:15px;
 
 }
 
 .modal-content textarea{
 
-resize:none;
+    min-height:90px;
 
-min-height:90px;
+    resize:none;
 
 }
 
+/* ================= Modal Buttons ================= */
+
 .modal-buttons{
 
-display:flex;
+    display:flex;
 
-gap:10px;
+    gap:10px;
 
-margin-top:22px;
+    margin-top:22px;
 
 }
 
 .modal-buttons button{
 
-flex:1;
+    flex:1;
 
-border:none;
+    border:none;
 
-border-radius:16px;
+    border-radius:16px;
 
-padding:14px;
+    padding:14px;
 
-font-size:15px;
+    color:white;
 
-font-weight:600;
+    background:rgba(255,255,255,.08);
 
-color:white;
+    font-size:15px;
 
-cursor:pointer;
+    cursor:pointer;
 
 }
 
 #saveBtn{
 
-background:#60a5fa;
+    background:#60a5fa;
 
 }
 
 #deleteBtn{
 
-background:#ef4444;
+    background:#ef4444;
 
 }
 
-#closeBtn{
-
-background:#3f3f46;
-
-}
-
-/* ================= LINKS ================= */
+/* ================= Links ================= */
 
 .link-panel{
 
-margin:18px;
+    margin:18px;
 
-padding:20px;
+    padding:18px;
 
-border-radius:24px;
+    border-radius:24px;
 
-background:var(--card);
+    background:var(--glass);
+
+}
+
+.link-panel h2{
+
+    margin-bottom:14px;
 
 }
 
 .links{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
 
-gap:12px;
-
-margin-top:15px;
+    gap:12px;
 
 }
 
 .links a{
 
-text-decoration:none;
+    text-decoration:none;
 
-text-align:center;
+    color:white;
 
-padding:14px;
+    text-align:center;
 
-border-radius:18px;
+    padding:14px;
 
-background:rgba(255,255,255,.05);
+    border-radius:18px;
 
-color:white;
+    background:rgba(255,255,255,.05);
 
-transition:.2s;
+    transition:.2s;
 
 }
 
 .links a:active{
 
-transform:scale(.95);
+    transform:scale(.95);
 
 }
 
@@ -626,25 +735,36 @@ transform:scale(.95);
 
 .day{
 
-min-height:82px;
+    min-height:82px;
+
+}
+
+.day-number{
+
+    font-size:14px;
 
 }
 
 .links{
 
-grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
 
 }
 
 .month-bar h2{
 
-font-size:19px;
+    font-size:19px;
 
 }
 
 }
-.member-filter button.active{
-    outline:2px solid white;
-    transform:scale(1.05);
-    box-shadow:0 0 10px rgba(255,255,255,.3);
+
+/* ================= Scroll ================= */
+
+::-webkit-scrollbar{
+
+    width:0;
+
+    height:0;
+
 }
