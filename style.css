@@ -72,3 +72,124 @@ body {
 
 /* 追記: ヘッダーやその他必要最低限のレイアウト */
 .month-bar { display: flex; justify-content: space-between; align-items: center; padding: 20px; }
+/* =========================================
+   Header
+========================================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 18px;
+  background:rgba(17,17,17,.65);
+  backdrop-filter:blur(20px);
+}
+
+.logo h1{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+.logo p{
+  margin-top:2px;
+  font-size:12px;
+  color:var(--sub);
+}
+
+.header-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.header-buttons button{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:var(--glass);
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.header-buttons button:hover{
+  transform:scale(1.05);
+}
+
+/* =========================================
+   Month
+========================================= */
+
+.month-bar h2{
+  font-size:22px;
+  font-weight:700;
+}
+
+.month-bar button{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:var(--glass);
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* =========================================
+   Date
+========================================= */
+
+.day-number{
+  font-size:15px;
+  font-weight:700;
+}
+
+/* =========================================
+   Member Filter
+========================================= */
+
+.member-filter{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:18px 14px;
+  scrollbar-width:none;
+}
+
+.member-filter::-webkit-scrollbar{
+  display:none;
+}
+
+.member-filter button{
+  flex:none;
+  padding:10px 16px;
+  border-radius:999px;
+  background:transparent;
+  color:#fff;
+  border:2px solid rgba(255,255,255,.12);
+  font-size:13px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.member-filter button.active{
+  transform:scale(1.05);
+  background:rgba(255,255,255,.08);
+}
+
+button[data-member="ALL"]{border-color:var(--all);}
+button[data-member="SHORI"]{border-color:var(--shori);}
+button[data-member="FUMA"]{border-color:var(--fuma);}
+button[data-member="SO"]{border-color:var(--so);}
+button[data-member="TAKUTO"]{border-color:var(--takuto);}
+button[data-member="YOSHITAKA"]{border-color:var(--yoshitaka);}
+button[data-member="MASAKI"]{border-color:var(--masaki);}
+button[data-member="SHUTO"]{border-color:var(--shuto);}
+button[data-member="TAIKI"]{border-color:var(--taiki);}
+button[data-member="HIYOKO"]{border-color:var(--hiyoko);}
