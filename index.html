@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timelesz Schedule</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,8 +24,6 @@
     <div class="week"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
     <div id="calendar" class="calendar"></div>
 
-    <section class="member-filter" id="filterArea"></section>
-
     <section class="plan-panel">
         <h2 id="selectedDate">予定</h2>
         <div id="planList">日付をダブルタップして予定を追加</div>
@@ -34,7 +33,14 @@
         <div class="modal-content">
             <h2 id="modalTitle">予定を追加</h2>
             <div id="memberSelector" class="member-selector-grid"></div>
-            <select id="category"></select>
+            <select id="category">
+                <option value="tv">📺 テレビ</option><option value="radio">📻 ラジオ</option>
+                <option value="stage">🎭 舞台・ミュージカル</option><option value="movie">🎬 映画</option>
+                <option value="stream">📱 サブスク配信</option><option value="fc">💌 FC更新</option>
+                <option value="hiyoko">🐥 ひよこ組</option><option value="magazine">📖 雑誌</option>
+                <option value="birthday">🎂 誕生日</option><option value="debut">🏷️ 結成日</option>
+                <option value="notice">📢 お知らせ</option><option value="event">🎉 イベント</option>
+            </select>
             <input id="titleInput" type="text" placeholder="タイトル">
             <input id="timeInput" type="time">
             <input id="placeInput" type="text" placeholder="場所">
