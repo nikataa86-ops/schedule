@@ -193,3 +193,219 @@ button[data-member="MASAKI"]{border-color:var(--masaki);}
 button[data-member="SHUTO"]{border-color:var(--shuto);}
 button[data-member="TAIKI"]{border-color:var(--taiki);}
 button[data-member="HIYOKO"]{border-color:var(--hiyoko);}
+/* =========================================
+   Plan Panel
+========================================= */
+
+.plan-panel{
+  margin:18px;
+  padding:20px;
+  border-radius:24px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+}
+
+.plan-panel h2{
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+#planList{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* =========================================
+   Plan Card
+========================================= */
+
+.plan-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:18px;
+}
+
+.member-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.member-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.plan-title{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.plan-category{
+  color:#cbd5e1;
+  margin-bottom:8px;
+}
+
+.plan-time,
+.plan-place,
+.plan-link,
+.plan-memo{
+  margin-top:8px;
+  line-height:1.7;
+}
+
+.plan-link a{
+  color:#93c5fd;
+  text-decoration:none;
+}
+
+/* =========================================
+   Modal
+========================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  background:rgba(0,0,0,.6);
+  z-index:999;
+}
+
+.modal-content{
+  width:100%;
+  max-width:520px;
+  background:#18181b;
+  border-radius:28px 28px 0 0;
+  padding:24px;
+  animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+
+from{
+transform:translateY(100%);
+}
+
+to{
+transform:translateY(0);
+}
+
+}
+
+.modal-content h2{
+  margin-bottom:18px;
+  text-align:center;
+}
+
+.modal-content label{
+  display:block;
+  margin-top:14px;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea{
+  width:100%;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  padding:12px;
+  background:rgba(255,255,255,.08);
+  color:white;
+  font-size:15px;
+}
+
+.modal-content textarea{
+  resize:none;
+  min-height:90px;
+}
+
+.modal-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+
+.modal-buttons button{
+  flex:1;
+  border:none;
+  border-radius:15px;
+  padding:14px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#saveBtn{
+  background:#60a5fa;
+}
+
+#deleteBtn{
+  background:#ef4444;
+}
+
+#closeBtn{
+  background:#3f3f46;
+}
+
+/* =========================================
+   Link Panel
+========================================= */
+
+.links{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:15px;
+}
+
+.links a{
+  text-decoration:none;
+  color:white;
+  text-align:center;
+  background:rgba(255,255,255,.05);
+  border-radius:18px;
+  padding:14px;
+  transition:.2s;
+}
+
+.links a:hover{
+  background:rgba(255,255,255,.1);
+}
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media(max-width:430px){
+
+.day{
+  min-height:80px;
+}
+
+.day-number{
+  font-size:14px;
+}
+
+.links{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.month-bar h2{
+  font-size:19px;
+}
+
+.modal-content{
+  padding:20px;
+}
+
+}
