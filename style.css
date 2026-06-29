@@ -1,56 +1,235 @@
 /* =========================================
-   Timelesz Schedule Ver.3 (Complete)
+   Timelesz Schedule Ver.3
 ========================================= */
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #0f0f12;
-  --card: rgba(255, 255, 255, .07);
-  --glass: rgba(255, 255, 255, .05);
-  --text: #ffffff;
-  --sub: #a1a1aa;
-  --all: #d1d5db;
-  --shori: #fca5a5;
-  --fuma: #d8b4fe;
-  --so: #86efac;
-  --takuto: #93c5fd;
-  --yoshitaka: #bef264;
-  --masaki: #f9a8d4;
-  --shuto: #fde68a;
-  --hiyoko: #fff59d;
-  --taiki: #ffffff;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  background: linear-gradient(180deg, #0d0d10, #18181b);
-  color: var(--text);
-  font-family: "Poppins", -apple-system, sans-serif;
-  min-height: 100vh;
+:root{
+
+  --bg:#0f0f12;
+  --card:rgba(255,255,255,.07);
+  --glass:rgba(255,255,255,.05);
+  --text:#ffffff;
+  --sub:#a1a1aa;
+
+  --all:#d1d5db;
+  --shori:#fca5a5;
+  --fuma:#d8b4fe;
+  --so:#86efac;
+  --takuto:#93c5fd;
+  --yoshitaka:#bef264;
+  --masaki:#f9a8d4;
+  --shuto:#fde68a;
+  --hiyoko:#fff59d;
+  --taiki:#ffffff;
+
 }
 
-/* --- カレンダーレイアウト --- */
-.calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 0 12px; }
-.week { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: var(--sub); padding: 10px 12px; font-size: 13px; }
+body{
+
+  background:linear-gradient(
+      180deg,
+      #0d0d10,
+      #18181b
+  );
+
+  color:var(--text);
+
+  font-family:"Poppins",-apple-system,sans-serif;
+
+  min-height:100vh;
+
+}
+
+/* Header */
+
+.header{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:100;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:22px;
+
+  backdrop-filter:blur(18px);
+
+  background:rgba(17,17,17,.65);
+
+}
+
+.logo h1{
+
+  font-size:25px;
+
+  font-weight:700;
+
+}
+
+.logo p{
+
+  color:#999;
+
+  font-size:13px;
+
+}
+
+.header-buttons{
+
+  display:flex;
+
+  gap:10px;
+
+}
+
+.header-buttons button{
+
+  border:none;
+
+  background:var(--glass);
+
+  color:white;
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  backdrop-filter:blur(20px);
+
+}
+
+/* Month */
+
+.month-bar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:18px;
+
+}
+
+.month-bar h2{
+
+  font-size:22px;
+
+}
+
+.month-bar button{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--glass);
+
+  color:white;
+
+  font-size:24px;
+
+}
+
+/* Week */
+
+.week{
+
+  display:grid;
+
+  grid-template-columns:repeat(7,1fr);
+
+  text-align:center;
+
+  color:#888;
+
+  padding:0 12px 12px;
+
+  font-size:13px;
+
+}
+
+/* Calendar */
+
+.calendar{
+
+  display:grid;
+
+  grid-template-columns:repeat(7,1fr);
+
+  gap:10px;
+
+  padding:0 12px 20px;
+
+}
 
 .day{
-  min-height:82px;
-  background:var(--card);
-  border-radius:18px;
-  padding:10px;
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  border:2px solid transparent;
-  backdrop-filter:blur(16px);
-  transition:.2s;
-}
-}
-.day:hover { background: rgba(255,255,255,.1); }
-.today { box-shadow: 0 0 18px rgba(255,255,255,.20); border-color: rgba(255,255,255,.3); }
 
-/* --- メンカラ外枠と丸 --- */
+  min-height:92px;
+
+  border-radius:22px;
+
+  background:var(--card);
+
+  backdrop-filter:blur(25px);
+
+  border:2px solid transparent;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  padding:10px;
+
+  transition:.25s;
+
+}
+
+.day:active{
+
+  transform:scale(.95);
+
+}
+
+.day-number{
+
+  font-size:15px;
+
+  font-weight:700;
+
+}
+
+/* 今日 */
+
+.today{
+
+  box-shadow:
+  0 0 18px rgba(255,255,255,.20);
+
+}
+
+/* メンカラ外枠 */
+
 .border-ALL{border-color:var(--all);}
 .border-SHORI{border-color:var(--shori);}
 .border-FUMA{border-color:var(--fuma);}
@@ -62,128 +241,89 @@ body {
 .border-TAIKI{border-color:var(--taiki);}
 .border-HIYOKO{border-color:var(--hiyoko);}
 
-.dot-wrap{ display:flex; gap:4px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
-.dot{ width:9px; height:9px; border-radius:50%; }
+/* メンカラ丸 */
 
-/* --- その他既存のパーツ（Plan Panel/Modal等） --- */
-.plan-panel, .link-panel { margin: 18px; padding: 18px; border-radius: 24px; background: var(--glass); backdrop-filter: blur(20px); }
-.plan-card { background: rgba(255,255,255,.05); border-radius: 20px; padding: 18px; margin-bottom: 10px; }
-.plan-preview { display: none; } /* 予定文字を表示しない */
-.hidden { display: none; }
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; justify-content: center; align-items: flex-end; z-index: 999; }
-.modal-content { width: 100%; max-width: 520px; background: #181818; border-radius: 30px 30px 0 0; padding: 25px; }
+.dot-wrap{
 
-/* 追記: ヘッダーやその他必要最低限のレイアウト */
-.month-bar { display: flex; justify-content: space-between; align-items: center; padding: 20px; }
-/* =========================================
-   Header
-========================================= */
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:100;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:22px 18px;
-  background:rgba(17,17,17,.65);
-  backdrop-filter:blur(20px);
+
+  gap:4px;
+
+  margin-top:10px;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
 }
 
-.logo h1{
-  font-size:24px;
-  font-weight:700;
-  letter-spacing:.5px;
-}
+.dot{
 
-.logo p{
-  margin-top:2px;
-  font-size:12px;
-  color:var(--sub);
-}
+  width:9px;
 
-.header-buttons{
-  display:flex;
-  gap:10px;
-}
+  height:9px;
 
-.header-buttons button{
-  width:42px;
-  height:42px;
-  border:none;
   border-radius:50%;
-  background:var(--glass);
-  color:#fff;
-  font-size:16px;
-  cursor:pointer;
-  transition:.2s;
+
 }
 
-.header-buttons button:hover{
-  transform:scale(1.05);
+/* 予定文字は表示しない */
+
+.plan-preview{
+
+  display:none;
+
 }
-
-/* =========================================
-   Month
-========================================= */
-
-.month-bar h2{
-  font-size:22px;
-  font-weight:700;
-}
-
-.month-bar button{
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:50%;
-  background:var(--glass);
-  color:#fff;
-  font-size:24px;
-  cursor:pointer;
-}
-
-/* =========================================
-   Date
-========================================= */
-
-.day-number{
-  font-size:15px;
-  font-weight:700;
-}
-
-/* =========================================
-   Member Filter
-========================================= */
+/* ================= FILTER ================= */
 
 .member-filter{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:18px 14px;
-  scrollbar-width:none;
+
+display:flex;
+
+gap:10px;
+
+overflow-x:auto;
+
+padding:16px 14px;
+
+scrollbar-width:none;
+
 }
 
 .member-filter::-webkit-scrollbar{
-  display:none;
+
+display:none;
+
 }
 
 .member-filter button{
-  flex:none;
-  padding:10px 16px;
-  border-radius:999px;
-  background:transparent;
-  color:#fff;
-  border:2px solid rgba(255,255,255,.12);
-  font-size:13px;
-  font-weight:600;
-  transition:.2s;
+
+flex:none;
+
+padding:10px 18px;
+
+border-radius:999px;
+
+background:transparent;
+
+color:#fff;
+
+font-size:13px;
+
+font-weight:600;
+
+border:2px solid rgba(255,255,255,.15);
+
+transition:.25s;
+
 }
 
 .member-filter button.active{
-  transform:scale(1.05);
-  background:rgba(255,255,255,.08);
+
+background:rgba(255,255,255,.08);
+
+transform:scale(1.05);
+
 }
 
 button[data-member="ALL"]{border-color:var(--all);}
@@ -196,219 +336,310 @@ button[data-member="MASAKI"]{border-color:var(--masaki);}
 button[data-member="SHUTO"]{border-color:var(--shuto);}
 button[data-member="TAIKI"]{border-color:var(--taiki);}
 button[data-member="HIYOKO"]{border-color:var(--hiyoko);}
-/* =========================================
-   Plan Panel
-========================================= */
+
+/* ================= PLAN ================= */
 
 .plan-panel{
-  margin:18px;
-  padding:20px;
-  border-radius:24px;
-  background:var(--glass);
-  backdrop-filter:blur(20px);
+
+margin:18px;
+
+padding:20px;
+
+border-radius:26px;
+
+background:var(--card);
+
+backdrop-filter:blur(20px);
+
 }
 
 .plan-panel h2{
-  font-size:20px;
-  margin-bottom:15px;
-}
 
-#planList{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
+margin-bottom:15px;
 
-/* =========================================
-   Plan Card
-========================================= */
+font-size:20px;
+
+}
 
 .plan-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:18px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:18px;
+
+padding:18px;
+
+border:1px solid rgba(255,255,255,.08);
+
 }
 
 .member-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:14px;
+
 }
 
 .member-dot{
-  width:12px;
-  height:12px;
-  border-radius:50%;
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
 }
 
 .plan-title{
-  font-size:17px;
-  font-weight:700;
-  margin-bottom:10px;
+
+font-size:18px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
 }
 
 .plan-category{
-  color:#cbd5e1;
-  margin-bottom:8px;
+
+color:#cbd5e1;
+
+margin-bottom:8px;
+
 }
 
 .plan-time,
 .plan-place,
 .plan-link,
 .plan-memo{
-  margin-top:8px;
-  line-height:1.7;
+
+margin-top:8px;
+
+line-height:1.7;
+
 }
 
-.plan-link a{
-  color:#93c5fd;
-  text-decoration:none;
-}
-
-/* =========================================
-   Modal
-========================================= */
+/* ================= MODAL ================= */
 
 .modal{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  background:rgba(0,0,0,.6);
-  z-index:999;
+
+position:fixed;
+
+inset:0;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-end;
+
+background:rgba(0,0,0,.6);
+
+z-index:999;
+
+}
+
+.hidden{
+
+display:none;
+
 }
 
 .modal-content{
-  width:100%;
-  max-width:520px;
-  background:#18181b;
-  border-radius:28px 28px 0 0;
-  padding:24px;
-  animation:slideUp .25s ease;
+
+width:100%;
+
+max-width:520px;
+
+background:#18181b;
+
+border-radius:30px 30px 0 0;
+
+padding:24px;
+
+animation:slideUp .25s ease;
+
 }
 
 @keyframes slideUp{
 
 from{
+
 transform:translateY(100%);
+
 }
 
 to{
+
 transform:translateY(0);
-}
 
 }
 
-.modal-content h2{
-  margin-bottom:18px;
-  text-align:center;
 }
 
 .modal-content label{
-  display:block;
-  margin-top:14px;
-  margin-bottom:6px;
-  font-size:14px;
+
+display:block;
+
+margin:14px 0 8px;
+
+font-size:14px;
+
 }
 
 .modal-content input,
-.modal-content select,
-.modal-content textarea{
-  width:100%;
-  border:none;
-  outline:none;
-  border-radius:14px;
-  padding:12px;
-  background:rgba(255,255,255,.08);
-  color:white;
-  font-size:15px;
+.modal-content textarea,
+.modal-content select{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
 }
 
 .modal-content textarea{
-  resize:none;
-  min-height:90px;
+
+resize:none;
+
+min-height:90px;
+
 }
 
 .modal-buttons{
-  display:flex;
-  gap:10px;
-  margin-top:22px;
+
+display:flex;
+
+gap:10px;
+
+margin-top:22px;
+
 }
 
 .modal-buttons button{
-  flex:1;
-  border:none;
-  border-radius:15px;
-  padding:14px;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
+
+flex:1;
+
+border:none;
+
+border-radius:16px;
+
+padding:14px;
+
+font-size:15px;
+
+font-weight:600;
+
+color:white;
+
+cursor:pointer;
+
 }
 
 #saveBtn{
-  background:#60a5fa;
+
+background:#60a5fa;
+
 }
 
 #deleteBtn{
-  background:#ef4444;
+
+background:#ef4444;
+
 }
 
 #closeBtn{
-  background:#3f3f46;
+
+background:#3f3f46;
+
 }
 
-/* =========================================
-   Link Panel
-========================================= */
+/* ================= LINKS ================= */
+
+.link-panel{
+
+margin:18px;
+
+padding:20px;
+
+border-radius:24px;
+
+background:var(--card);
+
+}
 
 .links{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:15px;
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+margin-top:15px;
+
 }
 
 .links a{
-  text-decoration:none;
-  color:white;
-  text-align:center;
-  background:rgba(255,255,255,.05);
-  border-radius:18px;
-  padding:14px;
-  transition:.2s;
+
+text-decoration:none;
+
+text-align:center;
+
+padding:14px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+
+color:white;
+
+transition:.2s;
+
 }
 
-.links a:hover{
-  background:rgba(255,255,255,.1);
+.links a:active{
+
+transform:scale(.95);
+
 }
 
-/* =========================================
-   Mobile
-========================================= */
+/* ================= iPhone ================= */
 
 @media(max-width:430px){
 
 .day{
-  min-height:80px;
-}
 
-.day-number{
-  font-size:14px;
+min-height:82px;
+
 }
 
 .links{
-  grid-template-columns:repeat(2,1fr);
+
+grid-template-columns:repeat(2,1fr);
+
 }
 
 .month-bar h2{
-  font-size:19px;
-}
 
-.modal-content{
-  padding:20px;
+font-size:19px;
+
 }
 
 }
