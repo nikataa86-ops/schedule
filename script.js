@@ -361,48 +361,47 @@ html+=`
 
 planList.innerHTML=html;
 
-document.getElementById("addPlan").onclick=()=>{
-    openModal(k);
+const addBtn=document.getElementById("addPlan");
+
+if(addBtn){
+
+addBtn.onclick=()=>{
+
+openModal(k);
+
 };
 
-} // ← showPlan終了
+}
 
+} // ← showPlan()終了
 // ---------- 保存 ----------
-saveBtn.addEventListener(()=>{
+saveBtn.onclick = () => {
 
-const plans=loadPlans();
+const plans = loadPlans();
 
 if(!plans[selectedKey]){
-
-plans[selectedKey]=[];
-
+    plans[selectedKey]=[];
 }
 
 const data={
 
-member:memberInput.value,
-
-category:categoryInput.value,
-
-title:titleInput.value,
-
-time:timeInput.value,
-
-place:placeInput.value,
-
-link:linkInput.value,
-
-memo:memoInput.value
+    member:memberInput.value,
+    category:categoryInput.value,
+    title:titleInput.value,
+    time:timeInput.value,
+    place:placeInput.value,
+    link:linkInput.value,
+    memo:memoInput.value
 
 };
 
 if(editIndex>=0){
 
-plans[selectedKey][editIndex]=data;
+    plans[selectedKey][editIndex]=data;
 
 }else{
 
-plans[selectedKey].push(data);
+    plans[selectedKey].push(data);
 
 }
 
@@ -420,7 +419,7 @@ showPlan(d);
 
 // ---------- 削除 ----------
 
-deleteBtn.addEventListener("click",()=>{
+deleteBtn.onclick = () => {
 
 if(editIndex<0){
 
