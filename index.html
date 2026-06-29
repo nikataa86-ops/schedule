@@ -1,57 +1,236 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timelesz Schedule</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Timelesz Schedule v3</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <header class="header">
-        <div class="logo"><h1>timelesz</h1><p>Schedule</p></div>
-        <div class="header-buttons">
-            <button id="todayBtn">Today</button>
-            <button id="settingBtn">⚙️</button>
-        </div>
-    </header>
 
-    <section class="month-bar">
-        <button id="prevMonth">‹</button>
-        <h2 id="monthTitle"></h2>
-        <button id="nextMonth">›</button>
-    </section>
+<header class="header">
 
-    <div class="week"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
-    <div id="calendar" class="calendar"></div>
+<div class="logo">
 
-    <section class="plan-panel">
-        <h2 id="selectedDate">予定</h2>
-        <div id="planList">日付をダブルタップして予定を追加</div>
-    </section>
+<h1>timelesz</h1>
 
-    <div id="modal" class="modal hidden">
-        <div class="modal-content">
-            <h2 id="modalTitle">予定を追加</h2>
-            <div id="memberSelector" class="member-selector-grid"></div>
-            <select id="category">
-                <option value="tv">📺 テレビ</option><option value="radio">📻 ラジオ</option>
-                <option value="stage">🎭 舞台・ミュージカル</option><option value="movie">🎬 映画</option>
-                <option value="stream">📱 サブスク配信</option><option value="fc">💌 FC更新</option>
-                <option value="hiyoko">🐥 ひよこ組</option><option value="magazine">📖 雑誌</option>
-                <option value="birthday">🎂 誕生日</option><option value="debut">🏷️ 結成日</option>
-                <option value="notice">📢 お知らせ</option><option value="event">🎉 イベント</option>
-            </select>
-            <input id="titleInput" type="text" placeholder="タイトル">
-            <input id="timeInput" type="time">
-            <input id="placeInput" type="text" placeholder="場所">
-            <textarea id="memoInput" placeholder="メモ"></textarea>
-            <div class="modal-buttons">
-                <button id="deleteBtn">削除</button>
-                <button id="saveBtn">保存</button>
-                <button id="closeBtn">閉じる</button>
-            </div>
-        </div>
-    </div>
-    <script src="script.js"></script>
+<p>Schedule</p>
+
+</div>
+
+<div class="header-buttons">
+
+<button id="todayBtn">Today</button>
+
+<button id="settingBtn">⚙️</button>
+
+</div>
+
+</header>
+
+<section class="month-bar">
+
+<button id="prevMonth">‹</button>
+
+<h2 id="monthTitle"></h2>
+
+<button id="nextMonth">›</button>
+
+</section>
+
+<div class="week">
+
+<div>日</div>
+<div>月</div>
+<div>火</div>
+<div>水</div>
+<div>木</div>
+<div>金</div>
+<div>土</div>
+
+</div>
+
+<div id="calendar" class="calendar"></div>
+
+<div class="member-filter">
+
+<button data-member="ALL">ALL</button>
+
+<button data-member="SHORI">SHORI</button>
+
+<button data-member="FUMA">FUMA</button>
+
+<button data-member="SO">SO</button>
+
+<button data-member="TAKUTO">TAKUTO</button>
+
+<button data-member="YOSHITAKA">YOSHITAKA</button>
+
+<button data-member="MASAKI">MASAKI</button>
+
+<button data-member="SHUTO">SHUTO</button>
+
+<button data-member="TAIKI">TAIKI</button>
+
+<button data-member="HIYOKO">🐥ひよこ組</button>
+
+</div>
+
+<section class="plan-panel">
+
+<h2 id="selectedDate">
+
+予定
+
+</h2>
+
+<div id="planList">
+
+日付をタップすると予定が表示されます
+
+</div>
+
+</section>
+
+<div id="modal" class="modal hidden">
+
+<div class="modal-content">
+
+<h2>予定を追加</h2>
+
+<label>カテゴリ</label>
+
+<select id="category">
+
+<option value="tv">📺 テレビ</option>
+
+<option value="radio">📻 ラジオ</option>
+
+<option value="stage">🎭 舞台・ミュージカル</option>
+
+<option value="movie">🎬 映画</option>
+
+<option value="live">🎤 ライブ</option>
+
+<option value="stream">📱 サブスク配信</option>
+
+<option value="fc">💌 FC更新</option>
+
+<option value="hiyoko">🐥 ひよこ組</option>
+
+<option value="magazine">📖 雑誌</option>
+
+<option value="birthday">🎂 誕生日</option>
+
+<option value="debut">🏷️ 結成日</option>
+
+<option value="notice">📢 お知らせ</option>
+
+<option value="event">🎉 イベント</option>
+
+<option value="youtube">📹 YouTube</option>
+
+<option value="instagram">📷 Instagram</option>
+
+<option value="tiktok">🎵 TikTok</option>
+
+<option value="x">🐦 X</option>
+
+</select>
+
+<label>メンバー</label>
+
+<select id="member">
+
+<option value="ALL">ALL</option>
+
+<option value="SHORI">SHORI</option>
+
+<option value="FUMA">FUMA</option>
+
+<option value="SO">SO</option>
+
+<option value="TAKUTO">TAKUTO</option>
+
+<option value="YOSHITAKA">YOSHITAKA</option>
+
+<option value="MASAKI">MASAKI</option>
+
+<option value="SHUTO">SHUTO</option>
+
+<option value="TAIKI">TAIKI</option>
+
+<option value="HIYOKO">🐥ひよこ組</option>
+
+</select>
+
+<label>タイトル</label>
+
+<input id="titleInput" type="text">
+
+<label>時間</label>
+
+<input id="timeInput" type="time">
+
+<label>場所</label>
+
+<input id="placeInput" type="text">
+
+<label>リンク</label>
+
+<input id="linkInput" type="url">
+
+<label>メモ</label>
+
+<textarea id="memoInput"></textarea>
+
+<div class="modal-buttons">
+
+<button id="deleteBtn">削除</button>
+
+<button id="saveBtn">保存</button>
+
+<button id="closeBtn">閉じる</button>
+
+</div>
+
+</div>
+
+</div>
+
+<section class="link-panel">
+
+<h2>LINK</h2>
+
+<div class="links">
+
+<a href="#" id="fcLink">💌 FC</a>
+
+<a href="#" id="ytLink">📹 YouTube</a>
+
+<a href="#" id="instaLink">📷 Instagram</a>
+
+<a href="#" id="tiktokLink">🎵 TikTok</a>
+
+<a href="#" id="xLink">🐦 X</a>
+
+<a href="#" id="lineLink">💬 LINE</a>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
 </body>
 </html>
