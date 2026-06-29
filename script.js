@@ -360,9 +360,15 @@ html+=`
 `;
 
 planList.innerHTML=html;
-    // ---------- 保存 ----------
 
-saveBtn.addEventListener("click",()=>{
+document.getElementById("addPlan").onclick=()=>{
+    openModal(k);
+};
+
+} // ← showPlan終了
+
+// ---------- 保存 ----------
+saveBtn.addEventListener(()=>{
 
 const plans=loadPlans();
 
