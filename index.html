@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timelesz Schedule</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,22 +20,10 @@
         <button id="nextMonth">›</button>
     </section>
 
-    <div class="week">
-        <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
-    </div>
+    <div class="week"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
     <div id="calendar" class="calendar"></div>
 
-    <section class="member-filter">
-        <button data-member="ALL">ALL</button>
-        <button data-member="SHORI">SHORI</button>
-        <button data-member="FUMA">FUMA</button>
-        <button data-member="SO">SO</button>
-        <button data-member="TAKUTO">TAKUTO</button>
-        <button data-member="YOSHITAKA">YOSHITAKA</button>
-        <button data-member="MASAKI">MASAKI</button>
-        <button data-member="SHUTO">SHUTO</button>
-        <button data-member="TAIKI">TAIKI</button>
-    </section>
+    <section class="member-filter" id="filterArea"></section>
 
     <section class="plan-panel">
         <h2 id="selectedDate">予定</h2>
@@ -45,9 +32,9 @@
 
     <div id="modal" class="modal hidden">
         <div class="modal-content">
-            <h2>予定を追加/編集</h2>
-            <select id="category"><option value="tv">📺 テレビ</option><option value="radio">📻 ラジオ</option></select>
-            <select id="member"><option value="SHORI">SHORI</option><option value="FUMA">FUMA</option></select>
+            <h2 id="modalTitle">予定を追加</h2>
+            <div id="memberSelector" class="member-selector-grid"></div>
+            <select id="category"></select>
             <input id="titleInput" type="text" placeholder="タイトル">
             <input id="timeInput" type="time">
             <input id="placeInput" type="text" placeholder="場所">
@@ -59,7 +46,6 @@
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
