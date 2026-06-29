@@ -3,9 +3,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Timelesz Schedule v3</title>
+<title>Timelesz Schedule</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,35 +18,41 @@
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header class="header">
 
-<div class="logo">
+    <div class="logo">
 
-<h1>timelesz</h1>
+        <h1>timelesz</h1>
 
-<p>Schedule</p>
+        <span>Schedule</span>
 
-</div>
+    </div>
 
-<div class="header-buttons">
+    <div class="header-icons">
 
-<button id="todayBtn">Today</button>
+        <button id="searchBtn">🔍</button>
 
-<button id="settingBtn">⚙️</button>
+        <button id="notifyBtn">🔔</button>
 
-</div>
+    </div>
 
 </header>
 
+<!-- ================= MONTH ================= -->
+
 <section class="month-bar">
 
-<button id="prevMonth">‹</button>
+    <button id="prevMonth">‹</button>
 
-<h2 id="monthTitle"></h2>
+    <h2 id="monthTitle"></h2>
 
-<button id="nextMonth">›</button>
+    <button id="nextMonth">›</button>
 
 </section>
+
+<!-- ================= WEEK ================= -->
 
 <div class="week">
 
@@ -60,7 +66,11 @@
 
 </div>
 
+<!-- ================= CALENDAR ================= -->
+
 <div id="calendar" class="calendar"></div>
+
+<!-- ================= MEMBER FILTER ================= -->
 
 <div class="member-filter">
 
@@ -86,6 +96,8 @@
 
 </div>
 
+<!-- ================= PLAN ================= -->
+
 <section class="plan-panel">
 
 <h2 id="selectedDate">
@@ -102,53 +114,67 @@
 
 </section>
 
+<!-- ================= MODAL ================= -->
+
 <div id="modal" class="modal hidden">
 
 <div class="modal-content">
 
-<h2>予定を追加</h2>
+<h2>
 
-<label>カテゴリ</label>
+予定を追加
+
+</h2>
+
+<label>
+
+カテゴリ
+
+</label>
 
 <select id="category">
 
-<option value="tv">📺 テレビ</option>
+<option>📺 テレビ</option>
 
-<option value="radio">📻 ラジオ</option>
+<option>📻 ラジオ</option>
 
-<option value="stage">🎭 舞台・ミュージカル</option>
+<option>🎤 ライブ</option>
 
-<option value="movie">🎬 映画</option>
+<option>🎭 舞台・ミュージカル</option>
 
-<option value="live">🎤 ライブ</option>
+<option>🎬 映画</option>
 
-<option value="stream">📱 サブスク配信</option>
+<option>📱 サブスク配信</option>
 
-<option value="fc">💌 FC更新</option>
+<option>💌 FC更新</option>
 
-<option value="hiyoko">🐥 ひよこ組</option>
+<option>🐥 ひよこ組</option>
 
-<option value="magazine">📖 雑誌</option>
+<option>📖 雑誌</option>
 
-<option value="birthday">🎂 誕生日</option>
+<option>🎂 誕生日</option>
 
-<option value="debut">🏷️ 結成日</option>
+<option>🏷️ 結成日</option>
 
-<option value="notice">📢 お知らせ</option>
+<option>📢 お知らせ</option>
 
-<option value="event">🎉 イベント</option>
+<option>🎉 イベント</option>
 
-<option value="youtube">📹 YouTube</option>
+<option>📹 YouTube</option>
 
-<option value="instagram">📷 Instagram</option>
+<option>📷 Instagram</option>
 
-<option value="tiktok">🎵 TikTok</option>
+<option>🎵 TikTok</option>
 
-<option value="x">🐦 X</option>
+<option>🐦 X</option>
 
 </select>
 
-<label>メンバー</label>
+<label>
+
+メンバー
+
+</label>
 
 <select id="member">
 
@@ -174,57 +200,95 @@
 
 </select>
 
-<label>タイトル</label>
+<label>
+
+タイトル
+
+</label>
 
 <input id="titleInput" type="text">
 
-<label>時間</label>
+<label>
+
+時間
+
+</label>
 
 <input id="timeInput" type="time">
 
-<label>場所</label>
+<label>
+
+場所
+
+</label>
 
 <input id="placeInput" type="text">
 
-<label>リンク</label>
+<label>
+
+リンク
+
+</label>
 
 <input id="linkInput" type="url">
 
-<label>メモ</label>
+<label>
+
+メモ
+
+</label>
 
 <textarea id="memoInput"></textarea>
 
 <div class="modal-buttons">
 
-<button id="deleteBtn">削除</button>
+<button id="deleteBtn">
 
-<button id="saveBtn">保存</button>
+削除
 
-<button id="closeBtn">閉じる</button>
+</button>
+
+<button id="saveBtn">
+
+保存
+
+</button>
+
+<button id="closeBtn">
+
+閉じる
+
+</button>
 
 </div>
 
 </div>
 
 </div>
+
+<!-- ================= LINKS ================= -->
 
 <section class="link-panel">
 
-<h2>LINK</h2>
+<h2>
+
+リンク
+
+</h2>
 
 <div class="links">
 
-<a href="#" id="fcLink">💌 FC</a>
+<a href="#">💌 FC</a>
 
-<a href="#" id="ytLink">📹 YouTube</a>
+<a href="#">▶️ YouTube</a>
 
-<a href="#" id="instaLink">📷 Instagram</a>
+<a href="#">📷 Instagram</a>
 
-<a href="#" id="tiktokLink">🎵 TikTok</a>
+<a href="#">🎵 TikTok</a>
 
-<a href="#" id="xLink">🐦 X</a>
+<a href="#">🐦 X</a>
 
-<a href="#" id="lineLink">💬 LINE</a>
+<a href="#">💬 LINE</a>
 
 </div>
 
