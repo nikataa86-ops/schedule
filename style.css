@@ -643,3 +643,8 @@ font-size:19px;
 }
 
 }
+.member-filter button.active{
+    outline:2px solid white;
+    transform:scale(1.05);
+    box-shadow:0 0 10px rgba(255,255,255,.3);
+}
