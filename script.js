@@ -360,48 +360,43 @@ html+=`
 `;
 
 planList.innerHTML=html;
-
-const addBtn=document.getElementById("addPlan");
-
-if(addBtn){
-
-addBtn.onclick=()=>{
-
-openModal(k);
-
-};
-
-}
-
-} // ← showPlan()終了
 // ---------- 保存 ----------
-saveBtn.onclick = () => {
 
-const plans = loadPlans();
+saveBtn.addEventListener("click",()=>{
+
+const plans=loadPlans();
 
 if(!plans[selectedKey]){
-    plans[selectedKey]=[];
+
+plans[selectedKey]=[];
+
 }
 
 const data={
 
-    member:memberInput.value,
-    category:categoryInput.value,
-    title:titleInput.value,
-    time:timeInput.value,
-    place:placeInput.value,
-    link:linkInput.value,
-    memo:memoInput.value
+member:memberInput.value,
+
+category:categoryInput.value,
+
+title:titleInput.value,
+
+time:timeInput.value,
+
+place:placeInput.value,
+
+link:linkInput.value,
+
+memo:memoInput.value
 
 };
 
 if(editIndex>=0){
 
-    plans[selectedKey][editIndex]=data;
+plans[selectedKey][editIndex]=data;
 
 }else{
 
-    plans[selectedKey].push(data);
+plans[selectedKey].push(data);
 
 }
 
@@ -419,7 +414,7 @@ showPlan(d);
 
 // ---------- 削除 ----------
 
-deleteBtn.onclick = () => {
+deleteBtn.addEventListener("click",()=>{
 
 if(editIndex<0){
 
@@ -572,7 +567,7 @@ planList.innerHTML=`
 </p>
 </div>
 `;
-    // ========================================
+// ========================================
 // LINKボタン（変更してOK）
 // ========================================
 
